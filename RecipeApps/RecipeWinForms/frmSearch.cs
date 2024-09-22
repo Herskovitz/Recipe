@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Data;
 using CPUFramework;
+using CPUWindowsFormsFramework;
+
 
 namespace RecipeWinForms
 {
@@ -19,9 +13,8 @@ namespace RecipeWinForms
             btnSearch.Click += BtnSearch_Click;
             gRecipe.CellDoubleClick += GRecipe_CellDoubleClick;
             FormatGrid();
+            btnNew.Click += BtnNew_Click;
         }
-
-
 
         private void SearchForRecipe(string recipename)
         {
@@ -39,10 +32,17 @@ namespace RecipeWinForms
         {
             ShowRecipeDetailsForm(e.RowIndex);
         }
-
+        private void BtnNew_Click(object? sender, EventArgs e)
+        {
+            ShowRecipeDetailsForm(-1);
+        }
         private void ShowRecipeDetailsForm(int rowindex)
         {
-            int id = (int)gRecipe.Rows[rowindex].Cells["RecipeId"].Value;
+            int id = 0;
+            if (rowindex > -1)
+            {
+                id = (int)gRecipe.Rows[rowindex].Cells["RecipeId"].Value;
+            }    
             frmRecipe frm = new frmRecipe();
             frm.ShowForm(id);
             
