@@ -260,7 +260,6 @@
             // 
             // lstCuisineType
             // 
-            lstCuisineType.Enabled = false;
             lstCuisineType.FormattingEnabled = true;
             lstCuisineType.Location = new Point(147, 53);
             lstCuisineType.Name = "lstCuisineType";
@@ -269,7 +268,6 @@
             // 
             // lstUsername
             // 
-            lstUsername.Enabled = false;
             lstUsername.FormattingEnabled = true;
             lstUsername.Location = new Point(147, 353);
             lstUsername.Name = "lstUsername";

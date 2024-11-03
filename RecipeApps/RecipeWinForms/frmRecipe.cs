@@ -65,12 +65,14 @@ namespace RecipeWinForms
                 sql = string.Join(Environment.NewLine, $"update recipe set",
                 $"RecipeName = '{r["RecipeName"]}',",
                 $"Calories = '{r["Calories"]}',",
-                $"DateDrafted = '{r["DateDrafted"]}' where RecipeId = {r["RecipeId"]}");
+                $"DateDrafted = '{r["DateDrafted"]}', ",
+                $"CuisineId = '{r["CuisineId"]}', ",
+                $"UserId = {r["UserId"]} where RecipeId = {r["RecipeId"]}");
             }
             else
             {
                 sql = "insert Recipe(CuisineId,UserId,RecipeName,Calories,DateDrafted,DatePublished)";
-                sql += $"select '{r["CuisineId"]}','{r["UserId"]}','{r["RecipeName"]}','{r["Calories"]}','{r["DateDrafted"]}','{r["DatePublished"]}'";
+                sql += $"select '{r["CuisineId"]}','{r["UserId"]}','{r["RecipeName"]}','{r["Calories"]}','{r["DateDrafted"]}',null";
             }
 
             Debug.Print(sql);
