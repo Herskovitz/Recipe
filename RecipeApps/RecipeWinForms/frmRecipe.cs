@@ -57,13 +57,37 @@ namespace RecipeWinForms
         }
         private void Save()
         {
-            Recipe.Save(dtrecipe);
-            this.Close();
+            Application.UseWaitCursor = true;
+            try
+            {
+                Recipe.Save(dtrecipe);
+                //ActiveForm.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Save Recipe");
+            }
+            finally
+            {
+                Application.UseWaitCursor = false;
+            }
         }
         private void Delete()
         {
-            Recipe.Delete(dtrecipe);
-            this.Close();
+            Application.UseWaitCursor = true;
+            try
+            {
+                Recipe.Delete(dtrecipe);
+                //ActiveForm.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Delete Recipe");
+            }
+            finally
+            {
+                Application.UseWaitCursor = false;
+            }
         }
     }
 }
