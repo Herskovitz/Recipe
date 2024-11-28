@@ -22,8 +22,6 @@ namespace RecipeSystem
         }
         public static DataTable Load(int recipeid)
         {
-            //string sql = "select r.*, c.CuisineType, u.Username from Recipe r join Cuisine c on c.CuisineId = r.CuisineId join Users u on u.UserId = r.UserId where r.RecipeId = " + recipeid.ToString();
-            //return SQLUtility.GetDataTable(sql);
             DataTable dt = new();
             SqlCommand cmd = SQLUtility.GetSqlCommand("RecipeGet");
             cmd.Parameters["@RecipeId"].Value = recipeid;
@@ -32,8 +30,6 @@ namespace RecipeSystem
         }
         public static DataTable GetCuisineList()
         {
-            //string sql = "select cuisineid, cuisinetype from cuisine";
-            //return SQLUtility.GetDataTable(sql);
             DataTable dt = new();
             SqlCommand cmd = SQLUtility.GetSqlCommand("CuisineGet");
             cmd.Parameters["@All"].Value = 1;
