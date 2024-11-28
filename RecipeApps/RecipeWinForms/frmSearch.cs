@@ -1,6 +1,6 @@
 ﻿using System.Data;
-using CPUFramework;
 using CPUWindowsFormsFramework;
+using RecipeSystem;
 
 
 namespace RecipeWinForms
@@ -18,9 +18,8 @@ namespace RecipeWinForms
 
         private void SearchForRecipe(string recipename)
         {
-            string sql = "select RecipeId, RecipeName, Calories, DateDrafted, DatePublished, DateArchived, RecipeStatus, RecipePicture from Recipe r where r.RecipeName like  '%" + recipename + "%'";
-            DataTable dt = SQLUtility.GetDataTable(sql);
-            gRecipe.DataSource = dt;
+            
+            gRecipe.DataSource = Recipe.SearchRecipes(recipename);
             gRecipe.Columns["RecipeId"].Visible = false;
         }
 
