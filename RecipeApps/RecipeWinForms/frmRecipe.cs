@@ -1,16 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Data;
 using CPUWindowsFormsFramework;
-using System.Diagnostics;
 using RecipeSystem;
-using RecordKeeperSystem;
 
 namespace RecipeWinForms
 {
@@ -61,7 +51,7 @@ namespace RecipeWinForms
             try
             {
                 Recipe.Save(dtrecipe);
-                //ActiveForm.Close();
+                this.Close();
             }
             catch (Exception ex)
             {
@@ -83,7 +73,7 @@ namespace RecipeWinForms
                     return;
                 }
                 Recipe.Delete(dtrecipe);
-                //ActiveForm.Close();
+                this.Close();
             }
             catch (Exception ex)
             {
