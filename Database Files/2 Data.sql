@@ -90,7 +90,7 @@ with x as(
     union select 'American', 'markmarque@gmail.com', 'Butter Muffins', 900, '06-06-2022', '10-06-2022', null
     union select 'Italian', 'Rosen_Rosemarie', 'Tomato Dip', 85, '10-12-2021', '11-12-2021', '04-25-2023'
     union select 'French', 'Rosen_Rosemarie', 'Eggplant Dip', 85, '11-20-2021', '12-10-2021', null
-    union select 'Italian', 'Rosen_Rosemarie', 'Lemon Pepper Baked Fish', 450, '4-04-2020', '05-05-2020', null
+    union select 'Italian', 'Rosen_Rosemarie', 'Lemon Pepper Baked Fish', 450, '4-04-2020', '05-05-2020','06-06-2021'
     union select 'American', 'Easter_Esther', 'Salad 1', 360, '02-12-2019', '03-12-2019', null
 )
 
@@ -261,7 +261,7 @@ with x as(
     select Meal = 'Breakfast Bash', Course = 'Main Course', Recipe = 'Cheese Bread', Main = 1
     union select 'Breakfast Bash', 'Main Course', 'Butter Muffins', 0
     union select 'Breakfast Bash', 'Appetizer', 'Apple Yogurt Smoothie', 1
-    union select 'Real Food', 'Main Course', 'Lemon Pepper Baked Fish', 1
+    --union select 'Real Food', 'Main Course', 'Lemon Pepper Baked Fish', 1
     union select 'Real Food', 'Main Course', 'Salad 1', 0
     union select 'Real Food', 'Dessert', 'Apple Yogurt Smoothie', 1
     union select 'Lunchtime', 'Appetizer', 'Salad 1', 1
@@ -269,7 +269,7 @@ with x as(
     union select 'Lunchtime', 'Main Course', 'Eggplant Dip', 0
     union select 'Lunchtime', 'Main Course', 'Tomato Dip', 0
     union select 'Lunchtime', 'Dessert', 'Butter Muffins', 1
-    union select 'Baked Meal', 'Appetizer', 'Chocolate Chip Cookies', 1
+    --union select 'Baked Meal', 'Appetizer', 'Chocolate Chip Cookies', 1
     union select 'Baked Meal', 'Main Course', 'Cheese Bread', 1
     union select 'Baked Meal', 'Dessert', 'Butter Muffins', 1
 )
@@ -289,26 +289,26 @@ on x.Recipe = r.RecipeName
 
 ;
 with x as(
-    select Cookbook = 'Treats for two' , Recipe = 'Chocolate Chip Cookies', Seq = 1
-    union select 'Treats for two', 'Apple Yogurt Smoothie', 2
+    select Cookbook = 'Treats for two' , Recipe = 'Apple Yogurt Smoothie', Seq = 1
+    --union select 'Treats for two', 'Chocolate Chip Cookies', 2
     union select 'Treats for two', 'Cheese Bread', 3
     union select 'Treats for two', 'Butter Muffins', 4
     union select 'Good Food Book', 'Cheese Bread', 1
-    union select 'Good Food Book', 'Lemon Pepper Baked Fish', 2
+    --union select 'Good Food Book', 'Lemon Pepper Baked Fish', 2
     union select 'Good Food Book', 'Tomato Dip', 3
     union select 'Good Food Book', 'Eggplant Dip', 4
     union select 'Good Food Book', 'Salad 1', 5
-    union select 'Best Baking Book', 'Chocolate Chip Cookies', 1
+    --union select 'Best Baking Book', 'Chocolate Chip Cookies', 1
     union select 'Best Baking Book', 'Butter Muffins', 2
     union select 'Best Baking Book', 'Cheese Bread', 3
     union select 'Best Seller Cookbook', 'Cheese Bread', 1
     union select 'Best Seller Cookbook', 'Tomato Dip', 2
     union select 'Best Seller Cookbook', 'Eggplant Dip', 3
     union select 'Best Seller Cookbook', 'Salad 1', 4
-    union select 'Best Seller Cookbook', 'Lemon Pepper Baked Fish', 5
+    --union select 'Best Seller Cookbook', 'Lemon Pepper Baked Fish', 5
     union select 'Best Seller Cookbook', 'Apple Yogurt Smoothie', 6
     union select 'Best Seller Cookbook', 'Butter Muffins', 7
-    union select 'Best Seller Cookbook', 'Chocolate Chip Cookies', 8
+    --union select 'Best Seller Cookbook', 'Chocolate Chip Cookies', 8
 )
 
 insert CookbookRecipe(CookbookId,RecipeId,RecipeSequence)

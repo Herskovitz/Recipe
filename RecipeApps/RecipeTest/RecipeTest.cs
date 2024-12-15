@@ -107,6 +107,36 @@ namespace RecipeTest
             TestContext.WriteLine("Number of rows in Users returned by app = " + dt.Rows.Count);
         }
         [Test]
+        public void DeleteRecipeNotInDraftStatusorArchivedLessThanThirtyDays()
+        {
+            string sql = @"
+                    select top 1 r.RecipeId 
+                    from recipe r
+                    left join MealCourseRecipe mcr
+                    on mcr.RecipeId = r.RecipeId
+                    left join CookbookRecipe cr
+                    on cr.RecipeId = r.RecipeId
+                    where mcr.RecipeId is null
+                    and cr.RecipeId is null
+                    and ((datediff(day,r.datearchived,getdate()) is null or datediff(day,r.datearchived,getdate()) < 30) and r.RecipeStatus <> 'Draft')
+                    ";
+            DataTable dt = SQLUtility.GetDataTable(sql);
+            int recipeid = 0;
+
+            if (dt.Rows.Count > 0)
+            {
+                recipeid = (int)dt.Rows[0]["RecipeId"];
+            }
+            Assume.That(recipeid > 0, "No Recipe Archived over 30 days or in Draft status in DB, cant run test");
+
+            TestContext.WriteLine("Existing test recipe, with id = " + recipeid);
+            TestContext.WriteLine("Ensure app cannot delete recipe with id " + recipeid);
+
+            Exception ex = Assert.Throws<Exception>(() => Recipe.Delete(dt));
+
+            TestContext.WriteLine(ex.Message);
+        }
+        [Test]
         public void DeleteRecipeAssociatedWithAMeal()
         {
             DataTable dt = SQLUtility.GetDataTable("select * from Recipe r join MealCourseRecipe m on m.RecipeId = r.RecipeId");
