@@ -44,26 +44,27 @@ namespace RecipeSystem
         {
             SQLUtility.DebugPrintDataTable(dtrecipe);
             DataRow r = dtrecipe.Rows[0];
-            string sql = "";
+            //string sql = "";
             int id = (int)r["RecipeId"];
 
-            if (id > 0)
-            {
-                sql = string.Join(Environment.NewLine, $"update recipe set",
-                $"RecipeName = '{r["RecipeName"]}',",
-                $"Calories = '{r["Calories"]}',",
-                $"DateDrafted = '{r["DateDrafted"]}', ",
-                $"CuisineId = '{r["CuisineId"]}', ",
-                $"UserId = {r["UserId"]} where RecipeId = {r["RecipeId"]}");
-            }
-            else
-            {
-                sql = "insert Recipe(CuisineId,UserId,RecipeName,Calories,DateDrafted,DatePublished)";
-                sql += $"select '{r["CuisineId"]}','{r["UserId"]}','{r["RecipeName"]}','{r["Calories"]}','{r["DateDrafted"]}',null";
-            }
+            //if (id > 0)
+            //{
+            //    sql = string.Join(Environment.NewLine, $"update recipe set",
+            //    $"RecipeName = '{r["RecipeName"]}',",
+            //    $"Calories = '{r["Calories"]}',",
+            //    $"DateDrafted = '{r["DateDrafted"]}', ",
+            //    $"CuisineId = '{r["CuisineId"]}', ",
+            //    $"UserId = {r["UserId"]} where RecipeId = {r["RecipeId"]}");
+            //}
+            //else
+            //{
+            //    sql = "insert Recipe(CuisineId,UserId,RecipeName,Calories,DateDrafted,DatePublished)";
+            //    sql += $"select '{r["CuisineId"]}','{r["UserId"]}','{r["RecipeName"]}','{r["Calories"]}','{r["DateDrafted"]}',null";
+            //}
 
-            Debug.Print(sql);
-            SQLUtility.ExecuteSQL(sql);
+            //Debug.Print(sql);
+            //SQLUtility.ExecuteSQL(sql);
+            SQLUtility.SaveDataRow(r, "RecipeUpdate");
         }
         public static void Delete(DataTable dtrecipe)
         {
