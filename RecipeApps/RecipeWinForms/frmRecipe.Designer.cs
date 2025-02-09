@@ -191,6 +191,7 @@
             // txtDateDrafted
             // 
             txtDateDrafted.Dock = DockStyle.Fill;
+            txtDateDrafted.Enabled = false;
             txtDateDrafted.Location = new Point(147, 153);
             txtDateDrafted.Multiline = true;
             txtDateDrafted.Name = "txtDateDrafted";

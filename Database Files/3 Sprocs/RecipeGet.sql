@@ -14,9 +14,9 @@ exec RecipeGet
 
 exec RecipeGet @All = 1
 
-declare @RId int
-select top 1 @RId = r.RecipeId from Recipe r
-exec RecipeGet @RecipeId = @RId
+--declare @RId int
+--select top 1 @RId = r.RecipeId from Recipe r
+--exec RecipeGet @RecipeId = @RId
 
-exec RecipeGet @RecipeName = 'test'
+--exec RecipeGet @RecipeName = 'test'
 

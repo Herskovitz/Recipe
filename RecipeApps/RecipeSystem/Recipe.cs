@@ -40,30 +40,17 @@ namespace RecipeSystem
             dt = SQLUtility.GetDataTable(cmd);
             return dt;
         }
+        public static DataTable GetMealList()
+        {
+            SqlCommand cmd = SQLUtility.GetSqlCommand("MealGet");
+            cmd.Parameters["@All"].Value = 1;
+            return SQLUtility.GetDataTable(cmd);
+        }
         public static void Save(DataTable dtrecipe)
         {
             SQLUtility.DebugPrintDataTable(dtrecipe);
             DataRow r = dtrecipe.Rows[0];
-            //string sql = "";
             int id = (int)r["RecipeId"];
-
-            //if (id > 0)
-            //{
-            //    sql = string.Join(Environment.NewLine, $"update recipe set",
-            //    $"RecipeName = '{r["RecipeName"]}',",
-            //    $"Calories = '{r["Calories"]}',",
-            //    $"DateDrafted = '{r["DateDrafted"]}', ",
-            //    $"CuisineId = '{r["CuisineId"]}', ",
-            //    $"UserId = {r["UserId"]} where RecipeId = {r["RecipeId"]}");
-            //}
-            //else
-            //{
-            //    sql = "insert Recipe(CuisineId,UserId,RecipeName,Calories,DateDrafted,DatePublished)";
-            //    sql += $"select '{r["CuisineId"]}','{r["UserId"]}','{r["RecipeName"]}','{r["Calories"]}','{r["DateDrafted"]}',null";
-            //}
-
-            //Debug.Print(sql);
-            //SQLUtility.ExecuteSQL(sql);
             SQLUtility.SaveDataRow(r, "RecipeUpdate");
         }
         public static void Delete(DataTable dtrecipe)

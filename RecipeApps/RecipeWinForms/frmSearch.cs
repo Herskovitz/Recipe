@@ -17,10 +17,10 @@ namespace RecipeWinForms
         }
 
         private void SearchForRecipe(string recipename)
-        {
-            
+        {   
             gRecipe.DataSource = Recipe.SearchRecipes(recipename);
             gRecipe.Columns["RecipeId"].Visible = false;
+            WindowsFormsUtility.FormatGridForSearchResults(gRecipe,"Recipe");
         }
 
         private void BtnSearch_Click(object? sender, EventArgs e)
