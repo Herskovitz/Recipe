@@ -23,6 +23,12 @@ namespace RecipeSystem
             dt = SQLUtility.GetDataTable(cmd);
             return dt;
         }
+        public static DataTable GetRecipeList()
+        {
+            SqlCommand cmd = SQLUtility.GetSqlCommand("RecipeGet");
+            cmd.Parameters["@All"].Value = 1;
+            return SQLUtility.GetDataTable(cmd);
+        }
         public static DataTable GetCuisineList()
         {
             DataTable dt = new();

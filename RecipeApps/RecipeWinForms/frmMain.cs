@@ -34,9 +34,9 @@ namespace RecipeWinForms
                     frmMeals f = new();
                     newfrm = f;
                 }
-                else if(frmtype == typeof(frmSearch))
+                else if(frmtype == typeof(frmRecipeList))
                 {
-                    frmSearch f = new();
+                    frmRecipeList f = new();
                     newfrm = f;
                 }
                 if (newfrm != null)
@@ -53,7 +53,7 @@ namespace RecipeWinForms
         }
         private void MnuRecipeList_Click(object? sender, EventArgs e)
         {
-            OpenForm(typeof(frmSearch));
+            OpenForm(typeof(frmRecipeList));
         }
         private void MnuMealList_Click(object? sender, EventArgs e)
         {

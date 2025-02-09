@@ -27,7 +27,7 @@ namespace RecipeWinForms
         private void FrmMeals_Activated(object? sender, EventArgs e)
         {
             gData.DataSource = Recipe.GetMealList();
-            WindowsFormsUtility.FormatGridForSearchResults(gData, "Meal");
+            WindowsFormsUtility.FormatGridForDataList(gData, "Meal");
         }
     }
 }
