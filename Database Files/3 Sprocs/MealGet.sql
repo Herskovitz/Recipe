@@ -23,4 +23,4 @@ begin
 end
 go
 
-exec MealGet @All = 1
+--exec MealGet @All = 1

@@ -1,24 +1,13 @@
-﻿using CPUFramework;
-using CPUWindowsFormsFramework;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlClient;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using CPUWindowsFormsFramework;
 using RecipeSystem;
 
 
 
 namespace RecipeWinForms
 {
-    public partial class frmMeals : Form
+    public partial class frmMealList : Form
     {
-        public frmMeals()
+        public frmMealList()
         {
             InitializeComponent();
             this.Activated += FrmMeals_Activated;
@@ -26,7 +15,7 @@ namespace RecipeWinForms
 
         private void FrmMeals_Activated(object? sender, EventArgs e)
         {
-            gData.DataSource = Recipe.GetMealList();
+            gData.DataSource = DataHandling.GetDataList("Meal");
             WindowsFormsUtility.FormatGridForDataList(gData, "Meal");
         }
     }

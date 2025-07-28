@@ -1,14 +1,5 @@
 ﻿using CPUWindowsFormsFramework;
 using RecipeSystem;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace RecipeWinForms
 {
@@ -19,12 +10,15 @@ namespace RecipeWinForms
             InitializeComponent();
             this.Activated += FrmRecipeList_Activated;
             btnNewRecipe.Click += BtnNewRecipe_Click;
+            gRecipe.CellDoubleClick += GRecipe_CellDoubleClick;
+            gRecipe.KeyDown += GRecipe_KeyDown;
         }
 
-        private void FrmRecipeList_Activated(object? sender, EventArgs e)
+        public void FrmRecipeList_Activated(object? sender, EventArgs e)
         {
-            gRecipe.DataSource = Recipe.GetRecipeList();
-            WindowsFormsUtility.FormatGridForDataList(gRecipe,"Recipe");
+            gRecipe.DataSource = DataHandling.GetDataList("Recipe");
+            WindowsFormsUtility.FormatGridForDataList(gRecipe, "Recipe", "Date");
+            WindowsFormsUtility.FormatGridForEdit(gRecipe, "Recipe");
         }
         private void BtnNewRecipe_Click(object? sender, EventArgs e)
         {
@@ -41,9 +35,19 @@ namespace RecipeWinForms
             {
                 id = (int)gRecipe.Rows[rowindex].Cells["RecipeId"].Value;
             }
-            frmRecipe frm = new frmRecipe();
-            frm.ShowForm(id);
+            if (this.MdiParent != null && this.MdiParent is frmMain)
+            {
+                ((frmMain)this.MdiParent).OpenForm(typeof(frmRecipe), id);
+            }
 
+        }
+        private void GRecipe_KeyDown(object? sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && gRecipe.SelectedRows.Count > 0)
+            {
+                ShowRecipeDetailsForm(gRecipe.SelectedRows[0].Index);
+                e.SuppressKeyPress = true;
+            }
         }
     }
 }

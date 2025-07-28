@@ -15,7 +15,7 @@ namespace RecipeWinForms
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             DBManager.SetConnectionString("Server=tcp:rherskovitz.database.windows.net,1433;Initial Catalog=RecipeDB;Persist Security Info=False;User ID=RH-Admin;Password=Git4607!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-           //DBManager.SetConnectionString("Server=.\\SQLExpress;Database=RecipeDB;Trusted_Connection=true");
+            //DBManager.SetConnectionString("Server=.\\SQLExpress;Database=RecipeDB;Trusted_Connection=true");
             Application.Run(new frmMain());
         }
     }

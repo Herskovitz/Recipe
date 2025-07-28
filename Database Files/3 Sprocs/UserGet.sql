@@ -1,4 +1,9 @@
-create or alter procedure dbo.UserGet(@UserId int = 0, @Username varchar(20) = '', @All bit = 0)
+create or alter procedure dbo.UserGet(
+	@UserId int = 0, 
+	@Username varchar(20) = '', 
+	@All bit = 0,
+	@IncludeBlank bit = 0
+	)
 as
 begin
 	select @Username = nullif(@Username, '')
@@ -7,17 +12,20 @@ begin
 	where u.UserId = @UserId
 	or u.Username like '%' + @Username + '%'
 	or @All = 1
+	union select 0, '', '', ''
+	where @IncludeBlank = 1
+	order by u.UserId
 end
 go
 
-exec UserGet
+--exec UserGet
 
-declare @UId int
-select top 1 @UId = u.UserId from Users u
-exec UserGet @UserId = @UId
+--declare @UId int
+--select top 1 @UId = u.UserId from Users u
+--exec UserGet @UserId = @UId
 
-exec UserGet @Username = 'n'
-exec userGet @Username = 'r'
+--exec UserGet @Username = 'n'
+--exec userGet @Username = 'r'
 
-exec UserGet @All = 1
+--exec UserGet @All = 1
 

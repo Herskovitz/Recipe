@@ -1,6 +1,6 @@
 ﻿namespace RecipeWinForms
 {
-    partial class frmMeals
+    partial class frmMealList
     {
         /// <summary>
         /// Required designer variable.
@@ -42,14 +42,14 @@
             gData.Size = new Size(800, 450);
             gData.TabIndex = 0;
             // 
-            // frmMeals
+            // frmMealList
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(gData);
-            Name = "frmMeals";
-            Text = "Meals";
+            Name = "frmMealList";
+            Text = "Meal List";
             ((System.ComponentModel.ISupportInitialize)gData).EndInit();
             ResumeLayout(false);
         }

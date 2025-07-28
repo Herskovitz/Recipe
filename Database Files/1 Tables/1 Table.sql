@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 
-=======
 --AF Amazing job! 100%
->>>>>>> a115047ce545a5fed0255b4272a4e242244bb1e3
 use RecipeDB
 go
 
@@ -70,7 +67,7 @@ create table dbo.Recipe(
     RecipeStatus as case
         when DateDrafted is not null and DatePublished is null and DateArchived is null then 'Draft'
         when DatePublished > DateDrafted and DateArchived is null then 'Published'
-        when DateArchived >DateDrafted and DateArchived > DatePublished then 'Archived'
+        when DateArchived >DateDrafted and (DateArchived > DatePublished or DatePublished is null) then 'Archived'
         end,
     RecipePicture as replace(concat('Recipe-',RecipeName,'.jpg'),' ','-'),
         constraint ck_Recipe_DatePublished_and_DateArchived_must_be_later_than_DateDrafted check(DateDrafted <= DatePublished and DateDrafted <= DateArchived),
@@ -86,7 +83,7 @@ create table dbo.RecipeIngredient(
         constraint ck_RecipeIngredient_IngredientSequence_must_be_greater_than_zero check(IngredientSequence > 0),
     Quantity decimal(4,2) not null
         constraint ck_RecipeIngredient_Quantity_must_be_greater_than_zero check(Quantity > 0),
-            constraint u_RecipeIngredient_RecipeId_IngredientId unique(RecipeId,IngredientId),
+            constraint u_RecipeInngredient_RecipeId_IngredientId unique(RecipeId,IngredientId),
             constraint u_RecipeIngredient_RecipeId_IngredientSequence unique(RecipeId,IngredientSequence)
 )
 

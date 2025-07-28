@@ -58,7 +58,7 @@
             btnNewRecipe.Name = "btnNewRecipe";
             btnNewRecipe.Size = new Size(183, 50);
             btnNewRecipe.TabIndex = 0;
-            btnNewRecipe.Text = "New Recipe";
+            btnNewRecipe.Text = "&New Recipe";
             btnNewRecipe.UseVisualStyleBackColor = true;
             // 
             // gRecipe

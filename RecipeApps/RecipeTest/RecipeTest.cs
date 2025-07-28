@@ -40,7 +40,8 @@ namespace RecipeTest
             r["DateDrafted"] = "01/01/2025";
             r["DatePublished"] = "01/01/2035";
 
-            Recipe.Save(dt);
+            DataHandling.Save(dt, "Recipe");
+
 
             int newid = SQLUtility.GetFirstColumnFirstRowValue("Select recipeid from recipe where recipename = '" + recipename + "'");
 
@@ -63,7 +64,7 @@ namespace RecipeTest
             TestContext.WriteLine("Existing test recipe, with id = " + recipeid);
             TestContext.WriteLine("Ensure app can delete recipe with id " + recipeid);
 
-            Recipe.Delete(dt);
+            DataHandling.Delete("Recipe", recipeid);
             DataTable dtafterdelete = SQLUtility.GetDataTable("select * from recipe where recipeid  = " + recipeid);
 
             Assert.IsTrue(dtafterdelete.Rows.Count == 0, "Record with recipeid " + recipeid + "does exist in the DB");
@@ -77,7 +78,7 @@ namespace RecipeTest
             Assume.That(recipeid > 0, "No recipes in DB, cant test");
             TestContext.WriteLine("Existing recipe with id = " + recipeid);
             TestContext.WriteLine("Ensure app loads recipe with id " + recipeid);
-            DataTable dt = Recipe.Load(recipeid);
+            DataTable dt = DataHandling.Load("Recipe", recipeid);
             int loadedrecipeid = (int)dt.Rows[0]["RecipeId"];
             Assert.IsTrue(loadedrecipeid == recipeid, (int)dt.Rows[0]["RecipeId"] + " <>" + recipeid);
             TestContext.WriteLine("Loaded recipe (" + loadedrecipeid + ") " + recipeid);
@@ -90,7 +91,7 @@ namespace RecipeTest
             Assume.That(cuisinecount > 0, "No Cuisines in DB, cant test");
             TestContext.WriteLine("Number of cuisines in DB = " + cuisinecount);
             TestContext.WriteLine("Ensure that the num of rows returned by app matches " + cuisinecount);
-            DataTable dt = Recipe.GetCuisineList();
+            DataTable dt = DataHandling.GetDataList("Cuisine");
             Assert.That(dt.Rows.Count == cuisinecount, "num of rows returned by app :" + dt.Rows.Count + " <>" + cuisinecount);
             TestContext.WriteLine("Number of rows in Cuisine returned by app = " + dt.Rows.Count);
         }
@@ -102,7 +103,7 @@ namespace RecipeTest
             Assume.That(usercount > 0, "No users in DB, cant test");
             TestContext.WriteLine("Number of users in DB  = " + usercount);
             TestContext.WriteLine("Ensure num of rows returned by app matches " + usercount);
-            DataTable dt = Recipe.GetUserList();
+            DataTable dt = DataHandling.GetDataList("User");
             Assert.IsTrue(dt.Rows.Count == usercount, "num of rows returned by app (" + dt.Rows.Count + ") <> " + usercount);
             TestContext.WriteLine("Number of rows in Users returned by app = " + dt.Rows.Count);
         }
@@ -132,7 +133,7 @@ namespace RecipeTest
             TestContext.WriteLine("Existing test recipe, with id = " + recipeid);
             TestContext.WriteLine("Ensure app cannot delete recipe with id " + recipeid);
 
-            Exception ex = Assert.Throws<Exception>(() => Recipe.Delete(dt));
+            Exception ex = Assert.Throws<Exception>(() => DataHandling.Delete("Recipe", recipeid));
 
             TestContext.WriteLine(ex.Message);
         }
@@ -151,7 +152,7 @@ namespace RecipeTest
             TestContext.WriteLine("Existing test recipe, with id = " + recipeid);
             TestContext.WriteLine("Ensure app cannot delete recipe with id " + recipeid);
 
-            Exception ex = Assert.Throws<Exception>(() => Recipe.Delete(dt));
+            Exception ex = Assert.Throws<Exception>(() => DataHandling.Delete("Recipe", recipeid));
 
             TestContext.WriteLine(ex.Message);
         }
@@ -170,10 +171,10 @@ namespace RecipeTest
 
             TestContext.WriteLine("Change recipe name from " + recipename + " to " + recipename2 + " which belongs to a different recipe that already exists in the DB");
 
-            DataTable dt = Recipe.Load(recipeid);
+            DataTable dt = DataHandling.Load("Recipe",recipeid);
             dt.Rows[0]["RecipeName"] = recipename2;
 
-            Exception ex = Assert.Throws<Exception>(() => Recipe.Save(dt));
+            Exception ex = Assert.Throws<Exception>(() => DataHandling.Save(dt, "Recipe"));
             TestContext.WriteLine(ex.Message);
         }
         [Test]
@@ -187,10 +188,10 @@ namespace RecipeTest
 
             TestContext.WriteLine("Change recipe name " + recipename + " to " + " blank");
 
-            DataTable dt = Recipe.Load(recipeid);
+            DataTable dt = DataHandling.Load("Recipe",recipeid);
             dt.Rows[0]["RecipeName"] = "";
 
-            Exception ex = Assert.Throws<Exception>(() => Recipe.Save(dt));
+            Exception ex = Assert.Throws<Exception>(() => DataHandling.Save(dt, "Recipe"));
             TestContext.WriteLine(ex.Message);
         }
         private string GetFirstColumnFirstRowValueAsString(string sql)

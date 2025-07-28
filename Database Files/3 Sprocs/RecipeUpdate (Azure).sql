@@ -13,7 +13,8 @@ as
 begin
 	declare @return int = 0
 
-	select @CuisineId = nullif(@CuisineId,0), @UserId = nullif(@UserId,0)	
+	select @CuisineId = nullif(@CuisineId,0), @UserId = nullif(@UserId,0)
+	
 if @RecipeId = 0
 begin
 	insert Recipe(CuisineId, UserId, RecipeName, Calories, DateDrafted, DatePublished, DateArchived)
