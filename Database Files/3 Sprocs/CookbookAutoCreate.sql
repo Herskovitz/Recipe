@@ -26,7 +26,7 @@ begin
 	group by u.UserId, u.UserFirstName, u.UserLastName
 	
 	select @CookbookId = scope_identity();
-
+--AS Variable declared but not used.
 	declare @Sequence int = 1
 
 	;

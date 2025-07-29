@@ -1,3 +1,4 @@
+--AS Why do you need a separate sproc for azure?
 create or alter proc dbo.RecipeUpdate
 (
 	@RecipeId int output,

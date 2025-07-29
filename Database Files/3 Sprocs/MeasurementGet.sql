@@ -16,6 +16,7 @@ begin
 	from Measurement m
 	where 
 	@All = 1
+--AS Insert '' rather than a space.
 	union select 0,' '
 	where @IncludeBlank = 1
 	order by m.MeasurementType 

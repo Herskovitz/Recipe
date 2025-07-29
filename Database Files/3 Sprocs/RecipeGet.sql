@@ -18,6 +18,7 @@ begin
 	where r.RecipeId = @RecipeId
 	or @All = 1
 	or r.RecipeName like '%' + @RecipeName + '%'
+--AS Why z?
 	union select 0,0,0,'','z','',0,0,0,0,0
 	where @IncludeBlank = 1
 	order by r.RecipeStatus desc

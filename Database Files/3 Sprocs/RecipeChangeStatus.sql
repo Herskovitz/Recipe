@@ -1,3 +1,4 @@
+--AS Why are you using all these hardcoded dates? Whenever a button is clicked update that date to current date, what are all these dates about?
 create or alter proc RecipeChangeStatus(
 	@RecipeId int = 0,
 	@DateDrafted datetime = '01/01/2000' output,

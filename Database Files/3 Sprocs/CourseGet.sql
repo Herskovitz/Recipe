@@ -14,6 +14,7 @@ begin
 	from Course c
 	where c.CourseId = @CourseId
 	or @All = 1
+--AS insert '' rather than a space
 	union select 0,' ',0
 	where @IncludeBlank = 1
 	order by c.CourseSequence
