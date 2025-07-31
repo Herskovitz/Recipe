@@ -1,8 +1,9 @@
+--AS Why are you using all these hardcoded dates? Whenever a button is clicked update that date to current date, what are all these dates about?
 create or alter proc RecipeChangeStatus(
 	@RecipeId int = 0,
-	@DateDrafted datetime = '01/01/2000' output,
-	@DatePublished datetime = '01/01/2000' output,
-	@DateArchived datetime = '01/01/2000' output,
+	@DateDrafted datetime output,
+	@DatePublished datetime output,
+	@DateArchived datetime output,
 	@RecipeStatus varchar(9) = '' output
 )
 as
@@ -10,13 +11,13 @@ begin
 
 declare @return int = 0
 
-if @DateArchived = '12/31/9999'
+if @RecipeStatus = 'Archived'
 	begin
 		update Recipe
 		set DateArchived = getdate()
 		where RecipeId = @RecipeId
 	end
-if @DatePublished = '12/31/9999'
+if @RecipeStatus = 'Published'
 	begin
 		update Recipe
 		set 
@@ -24,7 +25,7 @@ if @DatePublished = '12/31/9999'
 		DateArchived = null
 		where RecipeId = @RecipeId
 	end
-if @DateDrafted = '12/31/9999'
+if @RecipeStatus = 'Drafted'
 	begin
 		update Recipe
 		set

@@ -34,32 +34,29 @@ namespace RecipeWinForms
                     {
                         case "Draft":
                             SetDatesToSkip();
-                            SQLUtility.SetParamaterValue(cmd, "@DateDrafted", datetoupdate);
+                            SQLUtility.SetParamaterValue(cmd, "@RecipeStatus", "Drafted");
                             DisableUnavailableButtons(false, true, true);
                             break;
                         case "Publish":
                             SetDatesToSkip();
-                            SQLUtility.SetParamaterValue(cmd, "@DatePublished", datetoupdate);
+                            SQLUtility.SetParamaterValue(cmd, "@RecipeStatus", "Published");
                             DisableUnavailableButtons(true, false, true);
                             break;
                         case "Archive":
                             SetDatesToSkip();
-                            SQLUtility.SetParamaterValue(cmd, "@DateArchived", datetoupdate);
+                            SQLUtility.SetParamaterValue(cmd, "@RecipeStatus", "Archived");
                             DisableUnavailableButtons(true, true, false);
                             break;
                     }
+                    SQLUtility.SetParamaterValue(cmd, "@RecipeId", recipeid);
+                    SQLUtility.ExecuteSQL(cmd);
+                    bindsource.DataSource = DataHandling.Load("Recipe", recipeid);
                     break;
                 case DialogResult.No:
                 case DialogResult.Cancel:
                     break;
             }
-
-            SQLUtility.SetParamaterValue(cmd, "@RecipeId", recipeid);
-            SQLUtility.ExecuteSQL(cmd);
-
-            bindsource.DataSource = DataHandling.Load("Recipe", recipeid);
         }
-
         public void ShowForm(int recipeidval)
         {
             recipeid = recipeidval;
@@ -99,7 +96,7 @@ namespace RecipeWinForms
             {
                 status = "Draft";
             }
-            else
+            else if (dtrecipe.Rows[0]["RecipeStatus"].ToString().Count() > 5)
             {
                 status = dtrecipe.Rows[0]["RecipeStatus"].ToString().Substring(0, 7);
             }
