@@ -87,6 +87,7 @@
             txtRecipeStatus.Font = new Font("Segoe UI Semibold", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtRecipeStatus.Location = new Point(432, 38);
             txtRecipeStatus.Name = "txtRecipeStatus";
+            txtRecipeStatus.ReadOnly = true;
             txtRecipeStatus.Size = new Size(125, 30);
             txtRecipeStatus.TabIndex = 2;
             txtRecipeStatus.TextAlign = HorizontalAlignment.Center;
@@ -97,6 +98,7 @@
             txtRecipeName.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
             txtRecipeName.Location = new Point(64, 39);
             txtRecipeName.Name = "txtRecipeName";
+            txtRecipeName.ReadOnly = true;
             txtRecipeName.Size = new Size(672, 34);
             txtRecipeName.TabIndex = 0;
             txtRecipeName.TextAlign = HorizontalAlignment.Center;
@@ -156,6 +158,7 @@
             txtDateDrafted.Location = new Point(267, 39);
             txtDateDrafted.Multiline = true;
             txtDateDrafted.Name = "txtDateDrafted";
+            txtDateDrafted.ReadOnly = true;
             tblStatusDates.SetRowSpan(txtDateDrafted, 2);
             txtDateDrafted.Size = new Size(126, 52);
             txtDateDrafted.TabIndex = 1;
@@ -168,6 +171,7 @@
             txtDatePublished.Location = new Point(399, 39);
             txtDatePublished.Multiline = true;
             txtDatePublished.Name = "txtDatePublished";
+            txtDatePublished.ReadOnly = true;
             tblStatusDates.SetRowSpan(txtDatePublished, 2);
             txtDatePublished.Size = new Size(126, 52);
             txtDatePublished.TabIndex = 2;
@@ -180,6 +184,7 @@
             txtDateArchived.Location = new Point(531, 39);
             txtDateArchived.Multiline = true;
             txtDateArchived.Name = "txtDateArchived";
+            txtDateArchived.ReadOnly = true;
             tblStatusDates.SetRowSpan(txtDateArchived, 2);
             txtDateArchived.Size = new Size(126, 52);
             txtDateArchived.TabIndex = 3;

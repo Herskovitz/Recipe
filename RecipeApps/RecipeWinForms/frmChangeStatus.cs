@@ -12,9 +12,6 @@ namespace RecipeWinForms
         BindingSource bindsource = new();
         int recipeid = 0;
         SqlCommand cmd = SQLUtility.GetSqlCommand("RecipeChangeStatus");
-        DateTime datetoupdate = new(9999, 12, 31);
-        DateTime datetoskip = new(9999, 12, 30);
-
 
         public frmChangeStatus()
         {
@@ -30,26 +27,7 @@ namespace RecipeWinForms
             switch (response)
             {
                 case DialogResult.Yes:
-                    switch (btn.Text)
-                    {
-                        case "Draft":
-                            SetDatesToSkip();
-                            SQLUtility.SetParamaterValue(cmd, "@RecipeStatus", "Drafted");
-                            DisableUnavailableButtons(false, true, true);
-                            break;
-                        case "Publish":
-                            SetDatesToSkip();
-                            SQLUtility.SetParamaterValue(cmd, "@RecipeStatus", "Published");
-                            DisableUnavailableButtons(true, false, true);
-                            break;
-                        case "Archive":
-                            SetDatesToSkip();
-                            SQLUtility.SetParamaterValue(cmd, "@RecipeStatus", "Archived");
-                            DisableUnavailableButtons(true, true, false);
-                            break;
-                    }
-                    SQLUtility.SetParamaterValue(cmd, "@RecipeId", recipeid);
-                    SQLUtility.ExecuteSQL(cmd);
+                    SetStatusParamValuesAndButtonAvailability(btn.Text);                   
                     bindsource.DataSource = DataHandling.Load("Recipe", recipeid);
                     break;
                 case DialogResult.No:
@@ -81,11 +59,34 @@ namespace RecipeWinForms
             btnPublish.Enabled = publishedenabled;
             btnArchive.Enabled = archivedenabled;
         }
-        private void SetDatesToSkip()
+
+        private void SetStatusParamValuesAndButtonAvailability(string status)
         {
-            SQLUtility.SetParamaterValue(cmd, "@DateDrafted", datetoskip);
-            SQLUtility.SetParamaterValue(cmd, "@DatePublished", datetoskip);
-            SQLUtility.SetParamaterValue(cmd, "@DateArchived", datetoskip);
+            DateTime currentdate = DateTime.Now;
+            object datedrafted = DBNull.Value;
+            object datepublished = DBNull.Value;
+            object datearchived = DBNull.Value;
+
+            switch (status)
+            {
+                case "Draft":
+                    datedrafted = currentdate;
+                    DisableUnavailableButtons(false, true, true);
+                    break;
+                case "Publish":
+                    datepublished = currentdate;
+                    DisableUnavailableButtons(true, false, true);
+                    break;
+                case "Archive":
+                    datearchived = currentdate;
+                    DisableUnavailableButtons(true, true, false);
+                    break;
+            }
+            SQLUtility.SetParamaterValue(cmd, "@DateDrafted", datedrafted);
+            SQLUtility.SetParamaterValue(cmd, "@DatePublished", datepublished);
+            SQLUtility.SetParamaterValue(cmd, "@DateArchived", datearchived);
+            SQLUtility.SetParamaterValue(cmd, "@RecipeId", recipeid);
+            SQLUtility.ExecuteSQL(cmd);
         }
         private void SetButtonState()
         {

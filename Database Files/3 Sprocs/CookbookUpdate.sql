@@ -1,10 +1,10 @@
 create or alter proc CookbookUpdate(
 	@CookbookId int = 0 output,
-	@CookbookName varchar(100) = '',
-	@Price decimal (5,2) = 0,
+	@CookbookName varchar(100) = '' output,
+	@Price decimal (5,2) = 0 output,
 	@DateCreated date = getdate,
-	@Active bit = 0,
-	@UserId int = 0
+	@Active bit = 0 output,
+	@UserId int = 0 output
 )
 as
 begin	

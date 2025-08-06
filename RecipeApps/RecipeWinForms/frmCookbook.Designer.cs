@@ -72,7 +72,7 @@
             tblMain.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
             tblMain.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
             tblMain.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
-            tblMain.RowStyles.Add(new RowStyle(SizeType.Percent, 55.5555573F));
+            tblMain.RowStyles.Add(new RowStyle(SizeType.Percent, 55.55556F));
             tblMain.RowStyles.Add(new RowStyle(SizeType.Percent, 11.1111107F));
             tblMain.Size = new Size(800, 450);
             tblMain.TabIndex = 0;
@@ -187,6 +187,7 @@
             txtDateCreated.Location = new Point(399, 3);
             txtDateCreated.Multiline = true;
             txtDateCreated.Name = "txtDateCreated";
+            txtDateCreated.ReadOnly = true;
             txtDateCreated.Size = new Size(126, 38);
             txtDateCreated.TabIndex = 1;
             // 
@@ -219,8 +220,8 @@
             tblRecipes.Location = new Point(3, 153);
             tblRecipes.Name = "tblRecipes";
             tblRecipes.RowCount = 2;
-            tblRecipes.RowStyles.Add(new RowStyle(SizeType.Percent, 18F));
-            tblRecipes.RowStyles.Add(new RowStyle(SizeType.Percent, 82F));
+            tblRecipes.RowStyles.Add(new RowStyle(SizeType.Percent, 14F));
+            tblRecipes.RowStyles.Add(new RowStyle(SizeType.Percent, 86F));
             tblRecipes.Size = new Size(794, 244);
             tblRecipes.TabIndex = 5;
             // 
@@ -228,21 +229,21 @@
             // 
             gRecipes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             gRecipes.Dock = DockStyle.Fill;
-            gRecipes.Location = new Point(3, 46);
+            gRecipes.Location = new Point(3, 37);
             gRecipes.Name = "gRecipes";
             gRecipes.RowHeadersWidth = 51;
-            gRecipes.Size = new Size(788, 195);
+            gRecipes.Size = new Size(788, 204);
             gRecipes.TabIndex = 1;
             // 
             // btnSaveRecipes
             // 
             btnSaveRecipes.BackColor = Color.DodgerBlue;
             btnSaveRecipes.Dock = DockStyle.Left;
-            btnSaveRecipes.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnSaveRecipes.Font = new Font("Segoe UI", 7.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnSaveRecipes.ForeColor = SystemColors.ButtonHighlight;
             btnSaveRecipes.Location = new Point(3, 3);
             btnSaveRecipes.Name = "btnSaveRecipes";
-            btnSaveRecipes.Size = new Size(95, 37);
+            btnSaveRecipes.Size = new Size(95, 28);
             btnSaveRecipes.TabIndex = 0;
             btnSaveRecipes.Text = "Save";
             btnSaveRecipes.UseVisualStyleBackColor = false;

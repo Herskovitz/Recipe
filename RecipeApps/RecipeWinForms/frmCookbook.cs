@@ -71,7 +71,6 @@ namespace RecipeWinForms
             {
                 DataHandling.SaveDataRows(dtcookbook, "Cookbook");
                 b = true;
-                this.Close();
                 SetCookbookBindingSourceData();
             }
             catch (Exception ex)
@@ -100,7 +99,7 @@ namespace RecipeWinForms
         private void LoadCookbookRecipes()
         {
             LoadAndSetBindingCookbookRecipes();
-            WindowsFormsUtility.AddComboBoxToGrid(gRecipes, DataHandling.GetDataList("Recipe", true), "Recipe", "RecipeName");
+            WindowsFormsUtility.AddComboBoxToGrid(gRecipes, DataHandling.GetDataList("Recipe"), "Recipe", "RecipeName");
             WindowsFormsUtility.AddDeleteButtonToGrid(gRecipes, deletecolumnname);
         }
 
