@@ -27,8 +27,6 @@ begin
 	
 	select @CookbookId = scope_identity();
 
-	declare @Sequence int = 1
-
 	;
 	with x as (
 		select r.RecipeId, row_number() over (order by r.RecipeName) as RecipeSequence 
