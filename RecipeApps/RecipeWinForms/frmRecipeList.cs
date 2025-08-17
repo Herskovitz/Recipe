@@ -1,5 +1,6 @@
 ﻿using CPUWindowsFormsFramework;
 using RecipeSystem;
+using System.Windows.Forms;
 
 namespace RecipeWinForms
 {
@@ -10,8 +11,8 @@ namespace RecipeWinForms
             InitializeComponent();
             this.Activated += FrmRecipeList_Activated;
             btnNewRecipe.Click += BtnNewRecipe_Click;
-            gRecipe.CellDoubleClick += GRecipe_CellDoubleClick;
             gRecipe.KeyDown += GRecipe_KeyDown;
+            gRecipe.MouseDoubleClick += GRecipe_MouseDoubleClick;
         }
 
         public void FrmRecipeList_Activated(object? sender, EventArgs e)
@@ -24,10 +25,17 @@ namespace RecipeWinForms
         {
             ShowRecipeDetailsForm(-1);
         }
-        private void GRecipe_CellDoubleClick(object? sender, DataGridViewCellEventArgs e)
+        private void GRecipe_MouseDoubleClick(object? sender, MouseEventArgs e)
         {
-            ShowRecipeDetailsForm(e.RowIndex);
+            var hittestinfo = gRecipe.HitTest(e.X, e.Y);
+
+            if (hittestinfo.Type == DataGridViewHitTestType.ColumnHeader)
+            {
+                return;
+            }
+            ShowRecipeDetailsForm(hittestinfo.RowIndex);
         }
+
         private void ShowRecipeDetailsForm(int rowindex)
         {
             int id = 0;

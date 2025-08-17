@@ -57,7 +57,7 @@ namespace RecipeSystem
             int pkvalue = SQLUtility.GetValueFromFirstRowAsInt(dt, recordtype + "Id");
             if (pkvalue > 0)
             {
-                value = SQLUtility.GetValueFromFirstRowAsString(dt, recordtype + "Name");
+                value = $"{recordtype} - " + SQLUtility.GetValueFromFirstRowAsString(dt, recordtype + "Name");
             }
             return value;
         }

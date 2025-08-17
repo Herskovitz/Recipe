@@ -1,7 +1,8 @@
-﻿using System.Data;
-using CPUFramework;
+﻿using CPUFramework;
 using CPUWindowsFormsFramework;
 using RecipeSystem;
+using System.Data;
+using System.Windows.Forms;
 
 namespace RecipeWinForms
 {
@@ -24,7 +25,7 @@ namespace RecipeWinForms
             btnSaveIngredients.Click += BtnSaveIngredients_Click;
             btnChangeStatus.Click += BtnChangeStatus_Click;
             btnSaveDirections.Click += BtnSaveDirections_Click;
-            gIngredient.CellContentClick += GIngredient_CellContentClick;
+            gIngredient.MouseClick += GIngredient_MouseClick;
             gDirections.CellContentClick += GDirections_CellContentClick;
             this.FormClosing += FrmRecipe_FormClosing;
             this.Activated += FrmRecipe_Activated;
@@ -51,7 +52,6 @@ namespace RecipeWinForms
             }
 
             BindData();
-
             this.Text = DataHandling.GetNameOfOpenRecord("Recipe", dtrecipe);
             this.Show();
         }
@@ -161,20 +161,24 @@ namespace RecipeWinForms
             }
         }
 
-        private void GIngredient_CellContentClick(object? sender, DataGridViewCellEventArgs e)
+        private void GIngredient_MouseClick(object? sender, MouseEventArgs e)
         {
-            int id = WindowsFormsUtility.GetIdFromGrid(gIngredient, e.RowIndex, "RecipeIngredientId");
-            try
-            {
-                DataHandling.Delete("RecipeIngredient", id);
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message, "DeleteRecipeIngredient");
-            }
+            var hittestinfo = gIngredient.HitTest(e.X, e.Y);
 
-            RefreshRecipeIngredient();
+            if (gIngredient.Columns[hittestinfo.ColumnIndex] is DataGridViewButtonColumn)
+            {
+                int id = WindowsFormsUtility.GetIdFromGrid(gIngredient, hittestinfo.RowIndex, "RecipeIngredientId");
+                try
+                {
+                    DataHandling.Delete("RecipeIngredient", id);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "DeleteRecipeIngredient");
+                }
 
+                RefreshRecipeIngredient();
+            }
         }
         private void GDirections_CellContentClick(object? sender, DataGridViewCellEventArgs e)
         {

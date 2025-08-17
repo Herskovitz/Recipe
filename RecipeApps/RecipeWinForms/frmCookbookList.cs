@@ -10,12 +10,18 @@ namespace RecipeWinForms
             InitializeComponent();
             this.Activated += FrmCookbookList_Activated;
             btnNewCookbook.Click += BtnNewCookbook_Click;
-            gCookbook.CellDoubleClick += GCookbook_CellDoubleClick;
             gCookbook.KeyDown += GCookbook_KeyDown;
+            gCookbook.MouseDoubleClick += GCookbook_MouseDoubleClick;
         }
-        private void GCookbook_CellDoubleClick(object? sender, DataGridViewCellEventArgs e)
+        private void GCookbook_MouseDoubleClick(object? sender, MouseEventArgs e)
         {
-            ShowCookbookDetailsform(e.RowIndex);
+            var hittestinfo = gCookbook.HitTest(e.X, e.Y);
+
+            if (hittestinfo.Type == DataGridViewHitTestType.ColumnHeader)
+            {
+                return;
+            }
+            ShowCookbookDetailsform(hittestinfo.RowIndex);
         }
         private void FrmCookbookList_Activated(object? sender, EventArgs e)
         {
