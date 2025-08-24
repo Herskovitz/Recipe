@@ -5,10 +5,11 @@ create or alter proc dbo.RecipeUpdate
 	@CuisineId int ,
 	@UserId int ,
 	@Calories int ,
-	@DateDrafted datetime ,
-	@DatePublished datetime ,
-	@DateArchived datetime
-)
+	@DateDrafted datetime output,
+	@DatePublished datetime,
+	@DateArchived datetime,
+	@RecipeStatus varchar(9) output
+	)
 as
 begin
 	declare @return int = 0
@@ -18,10 +19,13 @@ begin
 
 if @RecipeId = 0
 begin
+	select @DateDrafted = getdate()
+
 	insert Recipe(CuisineId, UserId, RecipeName, Calories, DateDrafted, DatePublished, DateArchived)
-	values (@CuisineId, @UserId, @RecipeName, @Calories, getdate(), @DatePublished, @DateArchived)
+	values (@CuisineId, @UserId, @RecipeName, @Calories, @DateDrafted, @DatePublished, @DateArchived)
 
 	select @RecipeId = scope_identity()
+	select @RecipeStatus = r.RecipeStatus from Recipe r where r.RecipeId = @RecipeId
 end
 else
 begin

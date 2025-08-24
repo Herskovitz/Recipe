@@ -1,5 +1,6 @@
 ﻿using CPUFramework;
 using CPUWindowsFormsFramework;
+using Microsoft.VisualBasic;
 using RecipeSystem;
 using System.Data;
 using System.Windows.Forms;
@@ -16,6 +17,9 @@ namespace RecipeWinForms
         int recipeid = 0;
         string deletecolumnname = "deletecol";
         bool isdeleting = false;
+        List<Button> lstbtnenable = new();
+
+
 
         public frmRecipe()
         {
@@ -29,6 +33,9 @@ namespace RecipeWinForms
             gDirections.CellContentClick += GDirections_CellContentClick;
             this.FormClosing += FrmRecipe_FormClosing;
             this.Activated += FrmRecipe_Activated;
+            txtCalories.TextChanged += TxtCalories_TextChanged;
+            lstbtnenable = new() { btnDelete, btnSaveIngredients, btnSaveDirections, btnChangeStatus };
+
         }
 
         private void FrmRecipe_Activated(object? sender, EventArgs e)
@@ -48,7 +55,7 @@ namespace RecipeWinForms
             if (recipeid == 0)
             {
                 dtrecipe.Rows.Add();
-                DisableUnavailableButtons();
+                WindowsFormsUtility.ManageAvailableButtons(false, lstbtnenable);
             }
 
             BindData();
@@ -75,6 +82,7 @@ namespace RecipeWinForms
         }
         private void BtnSave_Click(object? sender, EventArgs e)
         {
+            PromtUserForNonNumericEntryInCaloriesTextBox();
             Save();
         }
         private void BtnDelete_Click(object? sender, EventArgs e)
@@ -91,7 +99,17 @@ namespace RecipeWinForms
             {
                 DataHandling.SaveDataRows(dtrecipe, "Recipe");
                 b = true;
-                this.Close();
+                WindowsFormsUtility.ManageAvailableButtons(true, lstbtnenable);
+
+
+                if (gIngredient.Columns.Count < 1)
+                {
+                    LoadRecipeIngredients();
+                }
+                if (gDirections.Columns.Count < 1)
+                {
+                    LoadRecipeDirections();
+                }
             }
             catch (Exception ex)
             {
@@ -101,6 +119,7 @@ namespace RecipeWinForms
             {
                 Application.UseWaitCursor = false;
             }
+            
             return b;
         }
         private void Delete()
@@ -130,7 +149,7 @@ namespace RecipeWinForms
         {
             RefreshRecipeIngredient();
             WindowsFormsUtility.AddComboBoxToGrid(gIngredient, DataHandling.GetDataList("Measurement", true), "Measurement", "MeasurementType");
-            WindowsFormsUtility.AddComboBoxToGrid(gIngredient, DataHandling.GetDataList("Ingredient", true), "Ingredient", "IngredientName");
+            WindowsFormsUtility.AddComboBoxToGrid(gIngredient, DataHandling.GetDataList("Ingredient"), "Ingredient", "IngredientName");
             WindowsFormsUtility.AddDeleteButtonToGrid(gIngredient, deletecolumnname);
         }
         private void LoadRecipeDirections()
@@ -238,13 +257,7 @@ namespace RecipeWinForms
                 }
             }
         }
-        private void DisableUnavailableButtons()
-        {
-            WindowsFormsUtility.ManageAvailableButtons(false, btnDelete);
-            WindowsFormsUtility.ManageAvailableButtons(false, btnSaveIngredients);
-            WindowsFormsUtility.ManageAvailableButtons(false, btnSaveDirections);
-            WindowsFormsUtility.ManageAvailableButtons(false, btnChangeStatus);
-        }
+        
         public void SetBindingSourceDataSource()
         {
             dtrecipe = DataHandling.Load("Recipe", recipeid);
@@ -258,6 +271,19 @@ namespace RecipeWinForms
             DataTable dtuser = DataHandling.GetDataList("User");
             WindowsFormsUtility.SetListBinding(lstCuisineType, dtcuisine, dtrecipe, "Cuisine");
             WindowsFormsUtility.SetListBinding(lstUsername, dtuser, dtrecipe, "User");
+        }
+        private void TxtCalories_TextChanged(object? sender, EventArgs e)
+        {
+            PromtUserForNonNumericEntryInCaloriesTextBox();
+        }
+        private void PromtUserForNonNumericEntryInCaloriesTextBox()
+        {
+            int cal = 0;
+            bool b = int.TryParse(txtCalories.Text, out cal);
+            if (b == false)
+            {
+                MessageBox.Show("Please enter a valid number.");
+            }
         }
     }
 }
