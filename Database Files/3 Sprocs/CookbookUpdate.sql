@@ -2,7 +2,7 @@ create or alter proc CookbookUpdate(
 	@CookbookId int = 0 output,
 	@CookbookName varchar(100) = '' output,
 	@Price decimal (5,2) = 0 output,
-	@DateCreated date = getdate,
+	@DateCreated date output,
 	@Active bit = 0 output,
 	@UserId int = 0 output
 )
@@ -14,6 +14,9 @@ begin
 
 	if @CookbookId = 0
 		begin
+			
+			select @DateCreated = getdate()
+
 			insert Cookbook(UserId,CookbookName,Price,DateCreated,Active)
 			values(@UserId,@CookbookName,@Price,getdate(),@Active)
 

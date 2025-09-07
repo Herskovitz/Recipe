@@ -19,7 +19,7 @@ begin
 
 if @RecipeId = 0
 begin
-	select @DateDrafted = getdate()
+	select @DateDrafted = convert(varchar,getdate(),101)
 
 	insert Recipe(CuisineId, UserId, RecipeName, Calories, DateDrafted, DatePublished, DateArchived)
 	values (@CuisineId, @UserId, @RecipeName, @Calories, @DateDrafted, @DatePublished, @DateArchived)

@@ -3,7 +3,6 @@ using CPUWindowsFormsFramework;
 using RecipeSystem;
 using System.Data;
 using System.Data.SqlClient;
-using System.Windows.Forms;
 
 
 namespace RecipeWinForms
@@ -28,8 +27,8 @@ namespace RecipeWinForms
             switch (response)
             {
                 case DialogResult.Yes:
-                    SetStatusParamValuesAndButtonAvailability(btn.Text);                   
-                    bindsource.DataSource = DataHandling.Load("Recipe", recipeid);
+                    SetStatusParamValuesAndButtonAvailability(btn.Text);
+                    AssignTextBoxesToConvertedDate();
                     break;
                 case DialogResult.No:
                 case DialogResult.Cancel:
@@ -63,7 +62,7 @@ namespace RecipeWinForms
 
         private void SetStatusParamValuesAndButtonAvailability(string status)
         {
-            
+
             DateTime currentdate = DateTime.Now;
             object datedrafted = DBNull.Value;
             object datepublished = DBNull.Value;
@@ -89,6 +88,7 @@ namespace RecipeWinForms
             SQLUtility.SetParamaterValue(cmd, "@DateArchived", datearchived);
             SQLUtility.SetParamaterValue(cmd, "@RecipeId", recipeid);
             SQLUtility.ExecuteSQL(cmd);
+
         }
         private void SetButtonState()
         {
@@ -109,6 +109,23 @@ namespace RecipeWinForms
                 {
                     c.Enabled = false;
                 }
+            }
+        }
+        private void AssignTextBoxesToConvertedDate()
+        {
+            DateTime? datedrafted = cmd.Parameters["@DateDrafted"].Value as DateTime?;
+            DateTime? datepublished = cmd.Parameters["@DatePublished"].Value as DateTime?;
+            DateTime? datearchived = cmd.Parameters["@DateArchived"].Value as DateTime?;
+
+            ConvertDatesToDatePartOnly(txtDateDrafted, datedrafted);
+            ConvertDatesToDatePartOnly(txtDatePublished, datepublished);
+            ConvertDatesToDatePartOnly(txtDateArchived, datearchived);
+        }
+        private void ConvertDatesToDatePartOnly(TextBox textbox, DateTime? datevalue)
+        {
+            if (datevalue.HasValue)
+            {
+                textbox.Text = datevalue.Value.ToString("MM/dd/yyyy");
             }
         }
     }

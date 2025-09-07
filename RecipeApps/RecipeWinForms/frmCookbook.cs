@@ -21,7 +21,7 @@ namespace RecipeWinForms
             btnSave.Click += BtnSave_Click;
             btnDelete.Click += BtnDelete_Click;
             btnSaveRecipes.Click += BtnSaveRecipes_Click;
-            gRecipes.CellMouseClick += GRecipes_CellMouseClick;
+            gRecipes.MouseClick += GRecipes_MouseClick;
             this.FormClosing += FrmCookbook_FormClosing;
             lstbtnenable = new() { btnDelete, btnSaveRecipes };
         }
@@ -72,12 +72,20 @@ namespace RecipeWinForms
             {
                 DataHandling.SaveDataRows(dtcookbook, "Cookbook");
                 b = true;
-                SetCookbookBindingSourceData();
+                WindowsFormsUtility.ManageAvailableButtons(true, lstbtnenable);
+                
+                if (gRecipes.Columns.Count < 1)
+                {
+                    LoadCookbookRecipes();
+                }
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
+            cookbookid = (int)dtcookbook.Rows[0]["CookbookId"];
+            this.Tag = cookbookid;
+            this.Text = DataHandling.GetNameOfOpenRecord("Cookbook", dtcookbook);
             return b;
         }
         private void BtnDelete_Click(object? sender, EventArgs e)
@@ -116,21 +124,32 @@ namespace RecipeWinForms
             }
         }
 
-        private void GRecipes_CellMouseClick(object? sender, DataGridViewCellMouseEventArgs e)
+
+        private void GRecipes_MouseClick(object? sender, MouseEventArgs e)
         {
             var hittestinfo = gRecipes.HitTest(e.X, e.Y);
-            int id = WindowsFormsUtility.GetIdFromGrid(gRecipes, hittestinfo.RowIndex, "RecipeIngredientId");
-
+            int id = WindowsFormsUtility.GetIdFromGrid(gRecipes, hittestinfo.RowIndex, "CookbookRecipeId");
+            if (hittestinfo.RowIndex < 0 || hittestinfo.ColumnIndex < 0)
+            {
+                return;
+            }
             if (gRecipes.Columns[hittestinfo.ColumnIndex] is DataGridViewButtonColumn)
             {
-                try
+                if (id > 0)
                 {
-                    DataHandling.Delete("CookbookRecipe", id);
-                    LoadAndSetBindingCookbookRecipes();
+                    try
+                    {
+                        DataHandling.Delete("CookbookRecipe", id);
+                        LoadAndSetBindingCookbookRecipes();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show("Unsaved records cannot be deleted.", "Delete Cookbook Recipe");
                 }
             }
         }

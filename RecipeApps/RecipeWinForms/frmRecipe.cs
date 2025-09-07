@@ -1,13 +1,10 @@
 ﻿using CPUFramework;
 using CPUWindowsFormsFramework;
-using Microsoft.VisualBasic;
 using RecipeSystem;
 using System.Data;
-using System.Windows.Forms;
 
 namespace RecipeWinForms
 {
-
     public partial class frmRecipe : Form
     {
         DataTable dtrecipe = new();
@@ -18,7 +15,6 @@ namespace RecipeWinForms
         string deletecolumnname = "deletecol";
         bool isdeleting = false;
         List<Button> lstbtnenable = new();
-
 
 
         public frmRecipe()
@@ -35,7 +31,6 @@ namespace RecipeWinForms
             this.Activated += FrmRecipe_Activated;
             txtCalories.TextChanged += TxtCalories_TextChanged;
             lstbtnenable = new() { btnDelete, btnSaveIngredients, btnSaveDirections, btnChangeStatus };
-
         }
 
         private void FrmRecipe_Activated(object? sender, EventArgs e)
@@ -82,7 +77,6 @@ namespace RecipeWinForms
         }
         private void BtnSave_Click(object? sender, EventArgs e)
         {
-            PromtUserForNonNumericEntryInCaloriesTextBox();
             Save();
         }
         private void BtnDelete_Click(object? sender, EventArgs e)
@@ -119,7 +113,9 @@ namespace RecipeWinForms
             {
                 Application.UseWaitCursor = false;
             }
-            
+            recipeid = (int)dtrecipe.Rows[0]["RecipeId"];
+            this.Tag = recipeid;
+            this.Text = DataHandling.GetNameOfOpenRecord("Recipe", dtrecipe);
             return b;
         }
         private void Delete()
@@ -183,37 +179,59 @@ namespace RecipeWinForms
         private void GIngredient_MouseClick(object? sender, MouseEventArgs e)
         {
             var hittestinfo = gIngredient.HitTest(e.X, e.Y);
+            int id = WindowsFormsUtility.GetIdFromGrid(gIngredient, hittestinfo.RowIndex, "RecipeIngredientId");
+
+            if (hittestinfo.RowIndex < 0 || hittestinfo.ColumnIndex < 0)
+            {
+                return;
+            }
 
             if (gIngredient.Columns[hittestinfo.ColumnIndex] is DataGridViewButtonColumn)
             {
-                int id = WindowsFormsUtility.GetIdFromGrid(gIngredient, hittestinfo.RowIndex, "RecipeIngredientId");
-                try
+                if (id > 0)
                 {
-                    DataHandling.Delete("RecipeIngredient", id);
+                    try
+                    {
+                        DataHandling.Delete("RecipeIngredient", id);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Delete Recipe Ingredient");
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show(ex.Message, "DeleteRecipeIngredient");
+                    MessageBox.Show("Unsaved records cannot be deleted.", "Delete Recipe Ingredient");
+                    return;
                 }
 
                 RefreshRecipeIngredient();
+
             }
         }
         private void GDirections_CellContentClick(object? sender, DataGridViewCellEventArgs e)
         {
             int id = WindowsFormsUtility.GetIdFromGrid(gDirections, e.RowIndex, "RecipeDirectionId");
-            try
+            if (id > 0)
             {
-                DataHandling.Delete("RecipeDirection", id);
+                try
+                {
+                    DataHandling.Delete("RecipeDirection", id);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, "Delete Recipe Direction");
+                }
             }
-            catch (Exception ex)
+            else
             {
-                MessageBox.Show(ex.Message, "DeleteRecipeDirection");
+                MessageBox.Show("Unsaved records cannot be deleted.", "Delete Recipe Direction");
+                return;
             }
 
             RefreshRecipeDirection();
         }
-        
+
         private void RefreshRecipeIngredient()
         {
             dtrecipeingredient = DataHandling.LoadChildRecords("RecipeIngredient", recipeid, "Recipe");
@@ -235,6 +253,7 @@ namespace RecipeWinForms
         }
         private void FrmRecipe_FormClosing(object? sender, FormClosingEventArgs e)
         {
+            PromtUserForNonNumericEntryInCaloriesTextBox();
             bindsource.EndEdit();
             if (SQLUtility.TableHasChanges(dtrecipe) == true && isdeleting == false)
             {
@@ -257,7 +276,7 @@ namespace RecipeWinForms
                 }
             }
         }
-        
+
         public void SetBindingSourceDataSource()
         {
             dtrecipe = DataHandling.Load("Recipe", recipeid);
@@ -278,11 +297,16 @@ namespace RecipeWinForms
         }
         private void PromtUserForNonNumericEntryInCaloriesTextBox()
         {
-            int cal = 0;
-            bool b = int.TryParse(txtCalories.Text, out cal);
-            if (b == false)
+            if (int.TryParse(txtCalories.Text, out _))
             {
-                MessageBox.Show("Please enter a valid number.");
+                txtCalories.ForeColor = Color.Black;
+                btnSave.Enabled = true;
+            }
+            else
+            {
+                txtCalories.ForeColor = Color.Red;
+                MessageBox.Show("Please enter a valid number of calories.", "Invalid Entry");
+                btnSave.Enabled = false;
             }
         }
     }

@@ -1,6 +1,5 @@
 ﻿using CPUWindowsFormsFramework;
 using RecipeSystem;
-using System.Windows.Forms;
 
 namespace RecipeWinForms
 {
