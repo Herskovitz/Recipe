@@ -62,9 +62,9 @@ namespace RecipeWinForms
             SetComboBoxBinding();
             WindowsFormsUtility.SetControlBinding(txtRecipeName, bindsource);
             WindowsFormsUtility.SetControlBinding(txtCalories, bindsource);
-            WindowsFormsUtility.SetControlBinding(txtDateDrafted, bindsource);
-            WindowsFormsUtility.SetControlBinding(txtDatePublished, bindsource);
-            WindowsFormsUtility.SetControlBinding(txtDateArchived, bindsource);
+            WindowsFormsUtility.SetControlBinding(txtDateDraftedAsDateOnly, bindsource);
+            WindowsFormsUtility.SetControlBinding(txtDatePublishedAsDateOnly, bindsource);
+            WindowsFormsUtility.SetControlBinding(txtDateArchivedAsDateOnly, bindsource);
             WindowsFormsUtility.SetControlBinding(txtRecipeStatus, bindsource);
         }
         public void OnFormShown()
@@ -93,16 +93,24 @@ namespace RecipeWinForms
             {
                 DataHandling.SaveDataRows(dtrecipe, "Recipe");
                 b = true;
-                WindowsFormsUtility.ManageAvailableButtons(true, lstbtnenable);
-
-
-                if (gIngredient.Columns.Count < 1)
+                if (recipeid == 0)
                 {
-                    LoadRecipeIngredients();
+                    WindowsFormsUtility.ManageAvailableButtons(true, lstbtnenable);
+
+
+                    if (gIngredient.Columns.Count < 1)
+                    {
+                        LoadRecipeIngredients();
+                    }
+                    if (gDirections.Columns.Count < 1)
+                    {
+                        LoadRecipeDirections();
+                    }
                 }
-                if (gDirections.Columns.Count < 1)
+                else
                 {
-                    LoadRecipeDirections();
+                    this.Close();
+                    MessageBox.Show("Recipe saved successfully!", "Save Recipe");
                 }
             }
             catch (Exception ex)

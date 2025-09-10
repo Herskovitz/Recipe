@@ -37,8 +37,8 @@ namespace RecipeWinForms
                 dtcookbook.Rows.Add();
                 WindowsFormsUtility.ManageAvailableButtons(false, lstbtnenable);
             }
-            BindData();
 
+            BindData();
             this.Text = DataHandling.GetNameOfOpenRecord("Cookbook", dtcookbook);
             this.Show();
         }
@@ -72,12 +72,21 @@ namespace RecipeWinForms
             {
                 DataHandling.SaveDataRows(dtcookbook, "Cookbook");
                 b = true;
-                WindowsFormsUtility.ManageAvailableButtons(true, lstbtnenable);
-                
-                if (gRecipes.Columns.Count < 1)
+                if (cookbookid == 0)
                 {
-                    LoadCookbookRecipes();
+                    WindowsFormsUtility.ManageAvailableButtons(true, lstbtnenable);
+
+                    if (gRecipes.Columns.Count < 1)
+                    {
+                        LoadCookbookRecipes();
+                    }
                 }
+                else
+                {
+                    this.Close();
+                    MessageBox.Show("Cookbook saved successfully!", "Save Cookbook");
+                }
+                
             }
             catch (Exception ex)
             {

@@ -44,9 +44,9 @@
             lblDateDrafted = new Label();
             lblDatePublished = new Label();
             lblDateArchived = new Label();
-            txtDateDrafted = new TextBox();
-            txtDatePublished = new TextBox();
-            txtDateArchived = new TextBox();
+            txtDateDraftedAsDateOnly = new TextBox();
+            txtDatePublishedAsDateOnly = new TextBox();
+            txtDateArchivedAsDateOnly = new TextBox();
             btnChangeStatus = new Button();
             tbChildRecords = new TabControl();
             tbIngredients = new TabPage();
@@ -224,9 +224,9 @@
             tblStatusDates.Controls.Add(lblDateDrafted, 0, 0);
             tblStatusDates.Controls.Add(lblDatePublished, 1, 0);
             tblStatusDates.Controls.Add(lblDateArchived, 2, 0);
-            tblStatusDates.Controls.Add(txtDateDrafted, 0, 1);
-            tblStatusDates.Controls.Add(txtDatePublished, 1, 1);
-            tblStatusDates.Controls.Add(txtDateArchived, 2, 1);
+            tblStatusDates.Controls.Add(txtDateDraftedAsDateOnly, 0, 1);
+            tblStatusDates.Controls.Add(txtDatePublishedAsDateOnly, 1, 1);
+            tblStatusDates.Controls.Add(txtDateArchivedAsDateOnly, 2, 1);
             tblStatusDates.Controls.Add(btnChangeStatus, 3, 0);
             tblStatusDates.Dock = DockStyle.Fill;
             tblStatusDates.Location = new Point(136, 198);
@@ -272,38 +272,38 @@
             lblDateArchived.Text = "Archived";
             lblDateArchived.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // txtDateDrafted
+            // txtDateDraftedAsDateOnly
             // 
-            txtDateDrafted.Dock = DockStyle.Fill;
-            txtDateDrafted.Enabled = false;
-            txtDateDrafted.Location = new Point(3, 25);
-            txtDateDrafted.Multiline = true;
-            txtDateDrafted.Name = "txtDateDrafted";
-            tblStatusDates.SetRowSpan(txtDateDrafted, 2);
-            txtDateDrafted.Size = new Size(268, 39);
-            txtDateDrafted.TabIndex = 0;
+            txtDateDraftedAsDateOnly.Dock = DockStyle.Fill;
+            txtDateDraftedAsDateOnly.Enabled = false;
+            txtDateDraftedAsDateOnly.Location = new Point(3, 25);
+            txtDateDraftedAsDateOnly.Multiline = true;
+            txtDateDraftedAsDateOnly.Name = "txtDateDraftedAsDateOnly";
+            tblStatusDates.SetRowSpan(txtDateDraftedAsDateOnly, 2);
+            txtDateDraftedAsDateOnly.Size = new Size(268, 39);
+            txtDateDraftedAsDateOnly.TabIndex = 0;
             // 
-            // txtDatePublished
+            // txtDatePublishedAsDateOnly
             // 
-            txtDatePublished.Dock = DockStyle.Fill;
-            txtDatePublished.Enabled = false;
-            txtDatePublished.Location = new Point(277, 25);
-            txtDatePublished.Multiline = true;
-            txtDatePublished.Name = "txtDatePublished";
-            tblStatusDates.SetRowSpan(txtDatePublished, 2);
-            txtDatePublished.Size = new Size(268, 39);
-            txtDatePublished.TabIndex = 1;
+            txtDatePublishedAsDateOnly.Dock = DockStyle.Fill;
+            txtDatePublishedAsDateOnly.Enabled = false;
+            txtDatePublishedAsDateOnly.Location = new Point(277, 25);
+            txtDatePublishedAsDateOnly.Multiline = true;
+            txtDatePublishedAsDateOnly.Name = "txtDatePublishedAsDateOnly";
+            tblStatusDates.SetRowSpan(txtDatePublishedAsDateOnly, 2);
+            txtDatePublishedAsDateOnly.Size = new Size(268, 39);
+            txtDatePublishedAsDateOnly.TabIndex = 1;
             // 
-            // txtDateArchived
+            // txtDateArchivedAsDateOnly
             // 
-            txtDateArchived.Dock = DockStyle.Fill;
-            txtDateArchived.Enabled = false;
-            txtDateArchived.Location = new Point(551, 25);
-            txtDateArchived.Multiline = true;
-            txtDateArchived.Name = "txtDateArchived";
-            tblStatusDates.SetRowSpan(txtDateArchived, 2);
-            txtDateArchived.Size = new Size(268, 39);
-            txtDateArchived.TabIndex = 2;
+            txtDateArchivedAsDateOnly.Dock = DockStyle.Fill;
+            txtDateArchivedAsDateOnly.Enabled = false;
+            txtDateArchivedAsDateOnly.Location = new Point(551, 25);
+            txtDateArchivedAsDateOnly.Multiline = true;
+            txtDateArchivedAsDateOnly.Name = "txtDateArchivedAsDateOnly";
+            tblStatusDates.SetRowSpan(txtDateArchivedAsDateOnly, 2);
+            txtDateArchivedAsDateOnly.Size = new Size(268, 39);
+            txtDateArchivedAsDateOnly.TabIndex = 2;
             // 
             // btnChangeStatus
             // 
@@ -515,9 +515,9 @@
         private Label lblDateDrafted;
         private Label lblDatePublished;
         private Label lblDateArchived;
-        private TextBox txtDateDrafted;
-        private TextBox txtDatePublished;
-        private TextBox txtDateArchived;
+        private TextBox txtDateDraftedAsDateOnly;
+        private TextBox txtDatePublishedAsDateOnly;
+        private TextBox txtDateArchivedAsDateOnly;
         private TabControl tbChildRecords;
         private TabPage tbIngredients;
         private TabPage tbDirections;

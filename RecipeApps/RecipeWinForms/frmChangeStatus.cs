@@ -29,6 +29,8 @@ namespace RecipeWinForms
                 case DialogResult.Yes:
                     SetStatusParamValuesAndButtonAvailability(btn.Text);
                     AssignTextBoxesToConvertedDate();
+                    DataTable dtrecipe = DataHandling.Load("Recipe", recipeid);
+                    txtRecipeStatus.Text = dtrecipe.Rows[0]["RecipeStatus"].ToString();
                     break;
                 case DialogResult.No:
                 case DialogResult.Cancel:
@@ -123,10 +125,7 @@ namespace RecipeWinForms
         }
         private void ConvertDatesToDatePartOnly(TextBox textbox, DateTime? datevalue)
         {
-            if (datevalue.HasValue)
-            {
-                textbox.Text = datevalue.Value.ToString("MM/dd/yyyy");
-            }
+            textbox.Text = datevalue.HasValue ? datevalue.Value.ToString("MM/dd/yyyy") : string.Empty;
         }
     }
 }

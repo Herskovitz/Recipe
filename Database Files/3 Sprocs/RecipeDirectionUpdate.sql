@@ -1,6 +1,6 @@
 create or alter proc RecipeDirectionUpdate(
 	@RecipeId int = 0,
-	@RecipeDirectionId int = 0,
+	@RecipeDirectionId int = 0 output,
 	@StepNum int = 0,
 	@DirectionDescription varchar(500) = '',
 	@Message varchar(500) = ''

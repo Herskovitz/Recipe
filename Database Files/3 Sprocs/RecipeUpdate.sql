@@ -8,7 +8,8 @@ create or alter proc dbo.RecipeUpdate
 	@DateDrafted datetime output,
 	@DatePublished datetime,
 	@DateArchived datetime,
-	@RecipeStatus varchar(9) output
+	@RecipeStatus varchar(9) output,
+	@DateDraftedAsDateOnly varchar(10) output
 	)
 as
 begin
@@ -19,13 +20,14 @@ begin
 
 if @RecipeId = 0
 begin
-	select @DateDrafted = convert(varchar,getdate(),101)
+	select @DateDrafted = getdate()
 
 	insert Recipe(CuisineId, UserId, RecipeName, Calories, DateDrafted, DatePublished, DateArchived)
 	values (@CuisineId, @UserId, @RecipeName, @Calories, @DateDrafted, @DatePublished, @DateArchived)
 
 	select @RecipeId = scope_identity()
 	select @RecipeStatus = r.RecipeStatus from Recipe r where r.RecipeId = @RecipeId
+	select @DateDraftedAsDateOnly = convert(varchar(10),@DateDrafted,101)
 end
 else
 begin

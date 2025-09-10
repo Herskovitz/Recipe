@@ -36,7 +36,18 @@ if @DateDrafted is not null
 		DatePublished = null,
 		DateArchived = null
 		where RecipeId = @RecipeId
-	end
+	end	
+		select @DateDrafted = r.DateDrafted from Recipe r where r.RecipeId = @RecipeId
+		select @DatePublished = r.DatePublished from Recipe r where r.RecipeId = @RecipeId
+		select @DateArchived = r.DateArchived from Recipe r where r.RecipeId = @RecipeId
 return @return
 end
 go
+
+--exec RecipeChangeStatus
+--@RecipeId = 11,
+--@DateDrafted = null,
+--@DatePublished = null,
+--@DateArchived = '9/8/2025 9:04:48 PM',
+--@RecipeStatus = null
+

@@ -1,5 +1,5 @@
 create or alter proc CookbookRecipeUpdate(
-	@CookbookRecipeId int = 0,
+	@CookbookRecipeId int = 0 output,
 	@CookbookId int = 0,
 	@RecipeId int = 0,
 	@RecipeSequence int = 0
