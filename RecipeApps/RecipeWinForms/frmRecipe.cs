@@ -2,6 +2,7 @@
 using CPUWindowsFormsFramework;
 using RecipeSystem;
 using System.Data;
+using System.Windows.Forms;
 
 namespace RecipeWinForms
 {
@@ -30,7 +31,28 @@ namespace RecipeWinForms
             this.FormClosing += FrmRecipe_FormClosing;
             this.Activated += FrmRecipe_Activated;
             txtCalories.TextChanged += TxtCalories_TextChanged;
+            gIngredient.EditingControlShowing += GIngredient_EditingControlShowing;
             lstbtnenable = new() { btnDelete, btnSaveIngredients, btnSaveDirections, btnChangeStatus };
+        }
+
+        private void GIngredient_EditingControlShowing(object? sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            TextBox ingtxtbox = e.Control as TextBox;
+            if (ingtxtbox != null)
+            {
+                ingtxtbox.TextChanged -= Ingtxtbox_TextChanged;
+                ingtxtbox.TextChanged += Ingtxtbox_TextChanged;
+            }
+        }
+
+        private void Ingtxtbox_TextChanged(object? sender, EventArgs e)
+        {
+            TextBox ingtxtbox = sender as TextBox;
+            WindowsFormsUtility.PromtUserForNonNumericEntryInNumericOnlyTextBox(ingtxtbox,btnSaveIngredients);
+            if (!decimal.TryParse(ingtxtbox.Text, out _))
+            {
+                ingtxtbox.Clear();
+            }
         }
 
         private void FrmRecipe_Activated(object? sender, EventArgs e)
@@ -261,7 +283,7 @@ namespace RecipeWinForms
         }
         private void FrmRecipe_FormClosing(object? sender, FormClosingEventArgs e)
         {
-            PromtUserForNonNumericEntryInCaloriesTextBox();
+            WindowsFormsUtility.PromtUserForNonNumericEntryInNumericOnlyTextBox(txtCalories, btnSave);
             bindsource.EndEdit();
             if (SQLUtility.TableHasChanges(dtrecipe) == true && isdeleting == false)
             {
@@ -301,21 +323,7 @@ namespace RecipeWinForms
         }
         private void TxtCalories_TextChanged(object? sender, EventArgs e)
         {
-            PromtUserForNonNumericEntryInCaloriesTextBox();
-        }
-        private void PromtUserForNonNumericEntryInCaloriesTextBox()
-        {
-            if (int.TryParse(txtCalories.Text, out _))
-            {
-                txtCalories.ForeColor = Color.Black;
-                btnSave.Enabled = true;
-            }
-            else
-            {
-                txtCalories.ForeColor = Color.Red;
-                MessageBox.Show("Please enter a valid number of calories.", "Invalid Entry");
-                btnSave.Enabled = false;
-            }
+            WindowsFormsUtility.PromtUserForNonNumericEntryInNumericOnlyTextBox(txtCalories, btnSave);
         }
     }
 }
