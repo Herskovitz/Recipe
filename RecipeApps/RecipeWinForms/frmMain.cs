@@ -23,7 +23,7 @@ namespace RecipeWinForms
 
         public void OpenForm(Type frmtype, int pkvalue = 0)
         {
-            bool b = WindowsFormsUtility.IsFormOpen(frmtype,pkvalue);
+            bool b = WindowsFormsUtility.IsFormOpen(frmtype, pkvalue);
 
             if (b == false)
             {
@@ -140,6 +140,14 @@ namespace RecipeWinForms
         }
         private void FrmMain_Shown(object? sender, EventArgs e)
         {
+            frmLogin f = new();
+            bool b = f.ShowLogin();
+            if (b == false)
+            {
+                this.Close();
+                Application.Exit();
+                return;
+            }
             OpenForm(typeof(frmDashboard));
         }
         private void MnuAutoCreateCookbook_Click(object? sender, EventArgs e)

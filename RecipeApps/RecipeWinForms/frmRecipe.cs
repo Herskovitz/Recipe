@@ -2,7 +2,6 @@
 using CPUWindowsFormsFramework;
 using RecipeSystem;
 using System.Data;
-using System.Windows.Forms;
 
 namespace RecipeWinForms
 {
@@ -30,30 +29,12 @@ namespace RecipeWinForms
             gDirections.CellContentClick += GDirections_CellContentClick;
             this.FormClosing += FrmRecipe_FormClosing;
             this.Activated += FrmRecipe_Activated;
-            txtCalories.TextChanged += TxtCalories_TextChanged;
+            txtCalories.KeyPress += TxtCalories_KeyPress;
             gIngredient.EditingControlShowing += GIngredient_EditingControlShowing;
+            gDirections.EditingControlShowing += GDirections_EditingControlShowing;
             lstbtnenable = new() { btnDelete, btnSaveIngredients, btnSaveDirections, btnChangeStatus };
         }
 
-        private void GIngredient_EditingControlShowing(object? sender, DataGridViewEditingControlShowingEventArgs e)
-        {
-            TextBox ingtxtbox = e.Control as TextBox;
-            if (ingtxtbox != null)
-            {
-                ingtxtbox.TextChanged -= Ingtxtbox_TextChanged;
-                ingtxtbox.TextChanged += Ingtxtbox_TextChanged;
-            }
-        }
-
-        private void Ingtxtbox_TextChanged(object? sender, EventArgs e)
-        {
-            TextBox ingtxtbox = sender as TextBox;
-            WindowsFormsUtility.PromtUserForNonNumericEntryInNumericOnlyTextBox(ingtxtbox,btnSaveIngredients);
-            if (!decimal.TryParse(ingtxtbox.Text, out _))
-            {
-                ingtxtbox.Clear();
-            }
-        }
 
         private void FrmRecipe_Activated(object? sender, EventArgs e)
         {
@@ -283,7 +264,6 @@ namespace RecipeWinForms
         }
         private void FrmRecipe_FormClosing(object? sender, FormClosingEventArgs e)
         {
-            WindowsFormsUtility.PromtUserForNonNumericEntryInNumericOnlyTextBox(txtCalories, btnSave);
             bindsource.EndEdit();
             if (SQLUtility.TableHasChanges(dtrecipe) == true && isdeleting == false)
             {
@@ -306,6 +286,37 @@ namespace RecipeWinForms
                 }
             }
         }
+        private void TxtCalories_KeyPress(object? sender, KeyPressEventArgs e)
+        {
+            WindowsFormsUtility.HandleNumberOnlyTextBoxInput(sender, e);
+        }
+        private void GIngredient_EditingControlShowing(object? sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            TextBox ingtxtbox = e.Control as TextBox;
+            if (ingtxtbox != null)
+            {
+                ingtxtbox.KeyPress -= Ingtxtbox_KeyPress;
+                ingtxtbox.KeyPress += Ingtxtbox_KeyPress;
+            }
+        }
+        private void GDirections_EditingControlShowing(object? sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            TextBox dirtxtbox = e.Control as TextBox;
+            if (dirtxtbox != null)
+            {
+                dirtxtbox.KeyPress -= Dirtxtbox_KeyPress;
+                dirtxtbox.KeyPress += Dirtxtbox_KeyPress;
+            }
+        }
+        private void Ingtxtbox_KeyPress(object? sender, KeyPressEventArgs e)
+        {
+            bool allowDecimals = gIngredient.CurrentCell.ColumnIndex == 6;
+            WindowsFormsUtility.HandleNumberOnlyTextBoxInput(sender, e, allowDecimals);
+        }
+        private void Dirtxtbox_KeyPress(object? sender, KeyPressEventArgs e)
+        {
+            WindowsFormsUtility.HandleNumberOnlyTextBoxInput(sender, e);
+        }
 
         public void SetBindingSourceDataSource()
         {
@@ -320,10 +331,6 @@ namespace RecipeWinForms
             DataTable dtuser = DataHandling.GetDataList("User");
             WindowsFormsUtility.SetListBinding(lstCuisineType, dtcuisine, dtrecipe, "Cuisine");
             WindowsFormsUtility.SetListBinding(lstUsername, dtuser, dtrecipe, "User");
-        }
-        private void TxtCalories_TextChanged(object? sender, EventArgs e)
-        {
-            WindowsFormsUtility.PromtUserForNonNumericEntryInNumericOnlyTextBox(txtCalories, btnSave);
         }
     }
 }

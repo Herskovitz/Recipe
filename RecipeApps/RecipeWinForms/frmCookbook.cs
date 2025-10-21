@@ -23,8 +23,11 @@ namespace RecipeWinForms
             btnSaveRecipes.Click += BtnSaveRecipes_Click;
             gRecipes.MouseClick += GRecipes_MouseClick;
             this.FormClosing += FrmCookbook_FormClosing;
+            txtPrice.KeyPress += TxtPrice_KeyPress; ;
             lstbtnenable = new() { btnDelete, btnSaveRecipes };
+            gRecipes.EditingControlShowing += GRecipes_EditingControlShowing;
         }
+
 
         public void ShowForm(int cookbookidvalue)
         {
@@ -86,7 +89,7 @@ namespace RecipeWinForms
                     this.Close();
                     MessageBox.Show("Cookbook saved successfully!", "Save Cookbook");
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -196,6 +199,26 @@ namespace RecipeWinForms
                         break;
                 }
             }
+        }
+
+        private void GRecipes_EditingControlShowing(object? sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            TextBox txtbox = e.Control as TextBox;
+            if (txtbox != null)
+            {
+                txtbox.KeyPress -= Txtbox_KeyPress;
+                txtbox.KeyPress += Txtbox_KeyPress;
+            }
+        }
+
+        private void Txtbox_KeyPress(object? sender, KeyPressEventArgs e)
+        {
+            WindowsFormsUtility.HandleNumberOnlyTextBoxInput(sender, e);
+        }
+
+        private void TxtPrice_KeyPress(object? sender, KeyPressEventArgs e)
+        {
+            WindowsFormsUtility.HandleNumberOnlyTextBoxInput(sender, e, true);
         }
     }
 }
