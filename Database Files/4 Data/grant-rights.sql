@@ -19,7 +19,7 @@ grant execute on RecipeIngredientGet to approle
 grant execute on NumOfIngredientsInRecipe to approle
 grant execute on RecipeDirectionDelete to approle
 grant execute on MeasurementGet to approle
-grant execute on RecipDirectionGet to approle
+grant execute on RecipeDirectionGet to approle
 grant execute on RecipeDirectionGet to approle
 grant execute on CuisineUpdate to approle
 grant execute on UserUpdate to approle

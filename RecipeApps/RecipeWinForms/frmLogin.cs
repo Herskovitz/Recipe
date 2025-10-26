@@ -16,6 +16,9 @@ namespace RecipeWinForms
 
         public bool ShowLogin()
         {
+#if DEBUG
+            this.Text = this.Text + " - DEV";
+#endif
             txtUsername.Text = Settings.Default.userid;
             txtPassword.Text = Settings.Default.password;
             this.ShowDialog();
@@ -25,7 +28,14 @@ namespace RecipeWinForms
         {
             try
             {
-                string connstring = ConfigurationManager.ConnectionStrings["devconn"].ConnectionString;
+                string connstringkey = "";
+#if DEBUG
+                connstringkey = "devconn";
+#else
+                connstringkey = "liveconn";
+#endif
+
+                string connstring = ConfigurationManager.ConnectionStrings[connstringkey].ConnectionString;
                 DBManager.SetConnectionString(connstring, true, txtUsername.Text,txtPassword.Text);
                 loginsuccess = true;
                 Settings.Default.userid = txtUsername.Text;

@@ -15,9 +15,12 @@ namespace RecipeWinForms
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             //ApplicationConfiguration.Initialize();
-            //DBManager.SetConnectionString("Server=tcp:rherskovitz.database.windows.net,1433;Initial Catalog=RecipeDB;Persist Security Info=False;User ID=RH-Admin;Password=Git4607!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            frmMain f = new frmMain();
 
-            Application.Run(new frmMain());
+#if DEBUG
+            f.Text = f.Text + " - DEV";
+#endif
+            Application.Run(f);
         }
     }
 }
