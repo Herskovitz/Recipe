@@ -16,10 +16,10 @@ namespace RecipeWinForms
             SetUpRadioButtons();
             BindData(currenttable);
             btnSave.Click += BtnSave_Click;
-            gData.CellContentClick += GData_CellContentClick; 
+            gData.CellContentClick += GData_CellContentClick;
+            gData.EditingControlShowing += GData_EditingControlShowing;
         }
 
-   
         private void BindData(TableEnum table)
         {
             currenttable = table;
@@ -121,6 +121,18 @@ namespace RecipeWinForms
                 Delete(e.RowIndex);
             }
         }
-
+        private void GData_EditingControlShowing(object? sender, DataGridViewEditingControlShowingEventArgs e)
+        {
+            TextBox txtbox = e.Control as TextBox;
+            if (txtbox != null)
+            {
+                txtbox.KeyPress -= Txtbox_KeyPress;
+                txtbox.KeyPress += Txtbox_KeyPress;
+            }
+        }
+        private void Txtbox_KeyPress(object? sender, KeyPressEventArgs e)
+        {
+            WindowsFormsUtility.HandleNumberOnlyTextBoxInput(sender, e);
+        }
     }
 }
