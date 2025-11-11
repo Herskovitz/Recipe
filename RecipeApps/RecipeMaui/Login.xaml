@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RecipeMaui.Login"
+             Title="Login">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Entry">
+                <Setter Property="MinimumWidthRequest" Value="200"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+        <Label 
+            Text="Login"
+            FontSize="Header"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+        <Label x:Name="Messagelbl" FontSize="Medium" TextColor="DarkRed"/>
+        <Border Padding="15">
+            <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="Auto,Auto" HorizontalOptions="Center" ColumnSpacing="10" RowSpacing="10">
+                <Label x:Name="Passwordlbl" Text="Password" Grid.Row="1" Grid.Column="0"/>
+                <Entry x:Name="Passwordtxt" Grid.Row="1" Grid.Column="1" IsPassword="True"/>
+                <Button x:Name="Loginbtn" Text="Login" Grid.Row="2" Grid.Column="0" BackgroundColor="SteelBlue" Clicked="Loginbtn_Clicked"/>
+                <Button x:Name="Cancelbtn" Text="Cancel" Grid.Row="2" Grid.Column="1" BackgroundColor="LightSteelBlue" Clicked="Cancelbtn_Clicked"/>
+                <Label x:Name="Usernametlbl" Text="Username" Grid.Row="0" Grid.Column="0"/>
+                <Entry x:Name="Usernametxt" Grid.Row="0" Grid.Column="1"/>
+            </Grid>
+        </Border>
+    </VerticalStackLayout>
+</ContentPage>

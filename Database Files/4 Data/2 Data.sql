@@ -91,7 +91,7 @@ with x as(
     union select 'Italian', 'Rosen_Rosemarie', 'Tomato Dip', 85, '10-12-2021', '11-12-2021', '04-25-2023'
     union select 'French', 'Rosen_Rosemarie', 'Eggplant Dip', 85, '11-20-2021', '12-10-2021', null
     union select 'Italian', 'Rosen_Rosemarie', 'Lemon Pepper Baked Fish', 450, '4-04-2020', '05-05-2020','06-06-2021'
-    union select 'American', 'Easter_Esther', 'Salad 1', 360, '02-12-2019', '03-12-2019', null
+    union select 'American', 'Easter_Esther', 'Salad One', 360, '02-12-2019', '03-12-2019', null
 )
 
 insert Recipe(CuisineId,UserId,RecipeName,Calories,DateDrafted,DatePublished,DateArchived)

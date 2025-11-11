@@ -1,0 +1,197 @@
+[33mcommit ace96128ee9bf7935674c0befc7d0845cddfbd0e[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Tue Oct 28 22:09:17 2025 -0400
+
+    Recipe App Complete
+
+[33mcommit 03bfc4e028bd0d12ae0e7d7971f85d6cb47f5384[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Tue Oct 28 22:01:30 2025 -0400
+
+    commented out unittestconnstring
+
+[33mcommit 575339c729bf77fe38f9b663324edb2794fc4de0[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Tue Oct 28 21:06:13 2025 -0400
+
+    updated git ignore
+
+[33mcommit 5831b775349f268b59ffa0321d031fbc56f400c2[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Tue Oct 28 21:03:07 2025 -0400
+
+    Delete App.secret.config
+
+[33mcommit 3d7da5c5598eaee19e676a360577c13005acf6d4[m[33m ([m[1;31morigin/HW/2-27[m[33m, [m[1;32mHW/2-27[m[33m)[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Sun Oct 26 12:27:53 2025 -0400
+
+    Login and Security
+
+[33mcommit 680c5bff95c8b8023f0f979f9ee73f8cf45d42a2[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Tue Oct 21 18:35:21 2025 -0400
+
+    HandleNumberOnlyTextBoxInput
+
+[33mcommit 1db54e1e38818339db5149aa763d05302d7e34b3[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Sun Sep 14 21:00:07 2025 -0400
+
+    RecipeDB login and security local
+
+[33mcommit 2d5b837fdfd536ebacd7198d0ecbb6b4cc2e579b[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Tue Sep 9 20:37:07 2025 -0400
+
+    Final Commit HW Recipe App Corrections
+
+[33mcommit 8cfb3ef66f0915a4606a77c377c243fab0c6c811[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Sun Sep 7 17:17:24 2025 -0400
+
+    before convert to date part only dates
+
+[33mcommit 4fa9ed5d720c6c21cf252425da52a6d511fb7fee[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Sat Aug 23 21:50:03 2025 -0400
+
+    before messing with SaveDataRow
+
+[33mcommit 756dce3011b1d14c1b35206ff88287a22dc3d3e4[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Sun Aug 17 13:09:44 2025 -0400
+
+    updated ingredient delete
+
+[33mcommit 1ae1b9cff64a2d88be072ff007cfe43a505cea41[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Tue Aug 5 21:22:09 2025 -0400
+
+    sproc changes
+
+[33mcommit c02b6dbd632bf3b97ed7aee29d43fc5bed1ecb5b[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Tue Aug 5 20:59:52 2025 -0400
+
+    commit some changes
+
+[33mcommit df365cd1c52eb9688d79de4f419315106aabf435[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Wed Jul 30 21:52:43 2025 -0400
+
+    commit change to error when user clicks no or cnacel on prompt to change status
+
+[33mcommit 85391647fc44723ba136596f488b912b634fc321[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Sun Jul 27 21:29:09 2025 -0400
+
+    Complete Recipe App
+
+[33mcommit 65946573be10c3633fa8662b5f03d8c433fb9667[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Sun Feb 9 13:33:06 2025 -0500
+
+    commit before editing Recipe Details Form
+
+[33mcommit 30c4f0d62abc07327eea44e9459a5624c2e4562f[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Sun Feb 9 12:51:42 2025 -0500
+
+    commit before editing RecipeGet sproc for RecipeList..
+
+[33mcommit 38b35dcc81e5632fd0c89a4f76649067edcc07bc[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Mon Jan 13 20:09:40 2025 -0500
+
+    HW/2-24 Corrections
+
+[33mcommit 702ac7a0c90a86a69c07645ed2d44c67da4e7548[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Sun Jan 12 20:11:47 2025 -0500
+
+    HW/2-24
+
+[33mcommit 2b6857c7fa33af62c51ca76cc50a4edb5710f5ff[m[33m ([m[1;31morigin/HW/2-23[m[33m, [m[1;32mHW/2-23[m[33m)[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Sun Jan 12 14:22:11 2025 -0500
+
+    HW/2-23
+
+[33mcommit 1a6bf023ce3c2c0017445f8235851e6ea47edc0d[m[33m ([m[1;31morigin/HW/2-22[m[33m, [m[1;32mHW/2-22[m[33m)[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Sun Dec 15 14:05:17 2024 -0500
+
+    HW/2-22
+
+[33mcommit 79287c3f16037271da762f23d7ab1847c4e4dcf9[m[33m ([m[1;31morigin/HW/2-21_corrections[m[33m, [m[1;32mHW/2-21_corrections[m[33m)[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Sat Dec 7 18:44:27 2024 -0500
+
+    HW/2-21 Corrections
+
+[33mcommit 172e2521f80aba5666f0b97e49f84274aae04f87[m[33m ([m[1;31morigin/HW/2-21[m[33m, [m[1;32mHW/2-21[m[33m)[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Tue Dec 3 22:11:35 2024 -0500
+
+    Homework 2-21
+
+[33mcommit 29823fc33ac5f02b3b9ca352fe505ebcbbfad7b1[m[33m ([m[1;31morigin/HW/2-20[m[33m, [m[1;32mHW/2-20[m[33m)[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Thu Nov 28 17:36:19 2024 -0500
+
+    Homework 2-20
+
+[33mcommit 2baa4ecdec3c7c065d660d397590ab3176b8211e[m[33m ([m[1;31morigin/HW/2-18[m[33m, [m[1;32mHW/2-18[m[33m)[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Wed Nov 27 22:04:28 2024 -0500
+
+    Homework 2-18
+
+[33mcommit ba81dcef2a8b2dddd0547fc4481db2eeec0583d6[m[33m ([m[1;31morigin/HW/2-16[m[33m, [m[1;32mHW/2-16[m[33m)[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Wed Nov 27 21:51:15 2024 -0500
+
+    Homework 2-16
+
+[33mcommit 64a73f073e8d2efa37458264441346cf78f984b6[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Sat Nov 16 22:01:39 2024 -0500
+
+    #44 hw
+
+[33mcommit a6d7f5ea2551410c2bbec034b447cab5429ec2d1[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Sun Nov 3 13:36:02 2024 -0500
+
+    2.15 hw corrections
+
+[33mcommit 7f1071b7448621775e018d6acd9be2b882fea2b3[m[33m ([m[1;31morigin/HW/2-15[m[33m, [m[1;31morigin/HW/2-14[m[33m, [m[1;32mHW/2-15[m[33m, [m[1;32mHW/2-14[m[33m)[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Sun Sep 22 14:57:51 2024 -0400
+
+    #43
+
+[33mcommit e5f8275d87afc8ca502c0a8e9bbf1283638cf330[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Sun Sep 8 22:45:48 2024 -0400
+
+    Code
+
+[33mcommit 7fe5a429292372f67a53feafde9d8715329a647b[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Sun Sep 8 16:36:29 2024 -0400
+
+    setup for RecipeWinForms
+
+[33mcommit d498e769316261106596a313c7922b14c1e5d1af[m
+Author: Herskovitz <hi31985508@gmail.com>
+Date:   Sun Sep 8 16:30:20 2024 -0400
+
+    database files
+
+[33mcommit 9dc620d2e37f668cd68c524185212e9c2b801d7b[m
+Author: Herskovitz <128321759+Herskovitz@users.noreply.github.com>
+Date:   Sun Sep 8 16:17:11 2024 -0400
+
+    Initial commit

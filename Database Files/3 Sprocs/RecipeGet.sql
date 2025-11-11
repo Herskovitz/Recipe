@@ -12,7 +12,7 @@ begin
 					r.DateDrafted, r.DatePublished, r.DateArchived, ListOrder = 0
 					,DateDraftedAsDateOnly = convert(varchar, r.DateDrafted, 101)
 					,DatePublishedAsDateOnly = convert(varchar, r.DatePublished, 101)
-					,DateArchivedAsDateOnly = convert(varchar, r.DateArchived, 101)
+					,DateArchivedAsDateOnly = convert(varchar, r.DateArchived, 101),r.RecipePicture
 	from Recipe r
 	join Users u
 	on r.UserId = u.UserId
@@ -21,7 +21,7 @@ begin
 	where r.RecipeId = @RecipeId
 	or @All = 1
 	or r.RecipeName like '%' + @RecipeName + '%'
-	union select 0,0,0,'','','',0,0,0,0,0,0,'','',''
+	union select 0,0,0,'','','',0,0,0,0,0,0,'','','',''
 	where @IncludeBlank = 1
 	order by ListOrder, r.RecipeStatus desc
 end

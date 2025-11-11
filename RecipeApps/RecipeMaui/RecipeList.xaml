@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="RecipeMaui.RecipeList"
+             Title="RecipeList">
+    <Grid RowDefinitions="Auto,*" ColumnDefinitions="Auto,Auto,Auto" HorizontalOptions="Center" RowSpacing="10" ColumnSpacing="10">
+        <Label Text="Recipe Name" Grid.Row="0" Grid.Column="0" FontAttributes="Bold"/>
+        <Entry x:Name="RecipeNametxt" Grid.Row="0" Grid.Column="1" MinimumWidthRequest="200"/>
+        <Button x:Name="RecipeSearchbtn" Text="Search" Grid.Row="0" Grid.Column="2" BackgroundColor="CornflowerBlue" Clicked="RecipeSearchbtn_Clicked"/>
+        <ListView x:Name="Recipelst" Grid.Row="1" Grid.ColumnSpan="3">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Grid RowDefinitions="Auto" ColumnDefinitions="Auto,Auto" ColumnSpacing="10">
+                            <Image Grid.Row="0" Grid.Column="0" HeightRequest="75" WidthRequest="75" Source="{Binding Path=[RecipePicture]}"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Path=[RecipeName]}"/>
+                        </Grid>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+    
+</ContentPage>
