@@ -8,7 +8,7 @@ namespace RecipeTest
     public class Tests
     {
         string connstring = ConfigurationManager.ConnectionStrings["devconn"].ConnectionString;
-        //string unittestconnstring = ConfigurationManager.ConnectionStrings["unittestconn"].ConnectionString;
+        string unittestconnstring = ConfigurationManager.ConnectionStrings["unittestconn"].ConnectionString;
 
         [SetUp]
         public void Setup()
@@ -20,7 +20,7 @@ namespace RecipeTest
         private DataTable GetDataTable(string sql)
         {
             DataTable dt = new();
-            //DBManager.SetConnectionString(unittestconnstring, true);
+            DBManager.SetConnectionString(unittestconnstring, true);
             dt = SQLUtility.GetDataTable(sql);
             DBManager.SetConnectionString(connstring, true);
             return dt;
@@ -28,7 +28,7 @@ namespace RecipeTest
         private int GetFirstColumnFirstRowValue(string sql)
         {
             int n = 0;
-            //DBManager.SetConnectionString(unittestconnstring, true);
+            DBManager.SetConnectionString(unittestconnstring, true);
             n = SQLUtility.GetFirstColumnFirstRowValue(sql);
             DBManager.SetConnectionString(connstring, true);
             return n;
@@ -39,7 +39,6 @@ namespace RecipeTest
         [TestCase(111, "01/01/2025")]
         [TestCase(1111, "01/01/1800")]
         public void InsertRecipe(int calories, DateTime datedrafted)
-        //
         {
             DataTable dt = GetDataTable("select * from recipe where recipeid = 0");
             DataRow r = dt.Rows.Add();
@@ -56,24 +55,28 @@ namespace RecipeTest
             r["CuisineId"] = cuisineid;
             r["UserId"] = userid;
             r["RecipeName"] = recipename;
-            r["Calories"] = 111;
-            r["DateDrafted"] = "01/01/2025";
+            r["Calories"] = calories;
+            r["DateDrafted"] = datedrafted;
             r["DatePublished"] = "01/01/2035";
 
+            if (!dt.Columns.Contains("DateDraftedAsDateOnly"))
+            {
+                dt.Columns.Add("DateDraftedAsDateOnly", typeof(DateTime));
+            }
+            r["DateDraftedAsDateOnly"] = datedrafted.Date;
 
-            DataHandling.SaveDataTables(dt, "Recipe");
-
+            bizRecipe recipe = new();
+            recipe.Save(dt);
 
             int newid = GetFirstColumnFirstRowValue("Select recipeid from recipe where recipename = '" + recipename + "'");
 
-            Assert.IsTrue(newid > 0, "Recipe with name  = " + recipename + "is not found in DB");
+            Assert.IsTrue(newid > 0, "Recipe with name  = " + recipename + "is found in DB");
             TestContext.WriteLine("Recipe with " + recipename + " was found in DB with pk value = " + newid);
-
         }
         [Test]
         public void DeleteRecipe()
         {
-            DataTable dt = GetDataTable("select top 1 RecipeId from recipe r  where RecipeName like '%test%'");
+            DataTable dt = GetDataTable("select top 1 RecipeId from recipe r  where RecipeName like '%test%' and RecipeStatus = 'Draft'");
             int recipeid = 0;
 
             if (dt.Rows.Count > 0)
@@ -85,7 +88,8 @@ namespace RecipeTest
             TestContext.WriteLine("Existing test recipe, with id = " + recipeid);
             TestContext.WriteLine("Ensure app can delete recipe with id " + recipeid);
 
-            DataHandling.Delete("Recipe", recipeid);
+            bizRecipe recipe = new();
+            recipe.Delete(dt);
             DataTable dtafterdelete = GetDataTable("select * from recipe where recipeid  = " + recipeid);
 
             Assert.IsTrue(dtafterdelete.Rows.Count == 0, "Record with recipeid " + recipeid + "does exist in the DB");
@@ -99,7 +103,8 @@ namespace RecipeTest
             Assume.That(recipeid > 0, "No recipes in DB, cant test");
             TestContext.WriteLine("Existing recipe with id = " + recipeid);
             TestContext.WriteLine("Ensure app loads recipe with id " + recipeid);
-            DataTable dt = DataHandling.Load("Recipe", recipeid);
+            bizRecipe recipe = new();
+            DataTable dt = recipe.Load(recipeid);
             int loadedrecipeid = (int)dt.Rows[0]["RecipeId"];
             Assert.IsTrue(loadedrecipeid == recipeid, (int)dt.Rows[0]["RecipeId"] + " <>" + recipeid);
             TestContext.WriteLine("Loaded recipe (" + loadedrecipeid + ") " + recipeid);
@@ -192,7 +197,8 @@ namespace RecipeTest
 
             TestContext.WriteLine("Change recipe name from " + recipename + " to " + recipename2 + " which belongs to a different recipe that already exists in the DB");
 
-            DataTable dt = DataHandling.Load("Recipe",recipeid);
+            bizRecipe recipe = new();
+            DataTable dt = recipe.Load(recipeid);
             dt.Rows[0]["RecipeName"] = recipename2;
 
             Exception ex = Assert.Throws<Exception>(() => DataHandling.SaveDataTables(dt, "Recipe"));
@@ -209,7 +215,8 @@ namespace RecipeTest
 
             TestContext.WriteLine("Change recipe name " + recipename + " to " + " blank");
 
-            DataTable dt = DataHandling.Load("Recipe",recipeid);
+            bizRecipe recipe = new();
+            DataTable dt = recipe.Load(recipeid);
             dt.Rows[0]["RecipeName"] = "";
 
             Exception ex = Assert.Throws<Exception>(() => DataHandling.SaveDataTables(dt, "Recipe"));
