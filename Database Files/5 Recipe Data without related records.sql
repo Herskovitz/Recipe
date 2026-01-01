@@ -25,4 +25,7 @@ union select (select CuisineId from Cuisine where CuisineType = 'Test'),(select 
 union select (select CuisineId from Cuisine where CuisineType = 'Test'),(select UserId from Users where UserFirstName = 'Test'),'Test Recipe 3',600,'09/19/2024','09/20/2024',null
 union select (select CuisineId from Cuisine where CuisineType = 'Testing'),(select UserId from Users where UserFirstName = 'Testing'),'Test Recipe 4',650,'09/19/2024','09/20/2024',Getdate() - 1
 union select (select CuisineId from Cuisine where CuisineType = 'Testing'),(select UserId from Users where UserFirstName = 'Testing'),'Test Recipe 5',700,'09/19/2024',null,null
-
+union select (select CuisineId from Cuisine where CuisineType = 'Test'),(select UserId from Users where UserFirstName = 'Test'),'Test Recipe 6',550,'09/19/2024',null,null
+union select (select CuisineId from Cuisine where CuisineType = 'Test'),(select UserId from Users where UserFirstName = 'Test'),'Test Recipe 7',600,'09/19/2024','09/20/2024',null
+union select (select CuisineId from Cuisine where CuisineType = 'Testing'),(select UserId from Users where UserFirstName = 'Testing'),'Test Recipe 8',650,'09/19/2024','09/20/2024',Getdate() - 1
+union select (select CuisineId from Cuisine where CuisineType = 'Testing'),(select UserId from Users where UserFirstName = 'Testing'),'Test Recipe 9',700,'09/19/2024',null,null
