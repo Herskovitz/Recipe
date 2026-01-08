@@ -2,7 +2,7 @@
 
 namespace RecipeSystem
 {
-    public class bizRecipe : bizObject
+    public class bizRecipe : bizObject<bizRecipe>
     {
         public bizRecipe()
         {

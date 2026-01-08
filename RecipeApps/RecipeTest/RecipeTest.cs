@@ -9,28 +9,28 @@ namespace RecipeTest
     {
         string connstring = ConfigurationManager.ConnectionStrings["devconn"].ConnectionString;
         string unittestconnstring = ConfigurationManager.ConnectionStrings["unittestconn"].ConnectionString;
+        string liveconn = ConfigurationManager.ConnectionStrings["liveconn"].ConnectionString;
 
         [SetUp]
         public void Setup()
         {
-            
-            DBManager.SetConnectionString(connstring, true);
+            DBManager.SetConnectionString(liveconn, true);
         }
 
         private DataTable GetDataTable(string sql)
         {
             DataTable dt = new();
-            DBManager.SetConnectionString(unittestconnstring, true);
+            //DBManager.SetConnectionString(unittestconnstring, true);
             dt = SQLUtility.GetDataTable(sql);
-            DBManager.SetConnectionString(connstring, true);
+            //DBManager.SetConnectionString(connstring, true);
             return dt;
         }
         private int GetFirstColumnFirstRowValue(string sql)
         {
             int n = 0;
-            DBManager.SetConnectionString(unittestconnstring, true);
+            //DBManager.SetConnectionString(unittestconnstring, true);
             n = SQLUtility.GetFirstColumnFirstRowValue(sql);
-            DBManager.SetConnectionString(connstring, true);
+            //DBManager.SetConnectionString(connstring, true);
             return n;
         }
 
