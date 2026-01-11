@@ -21,7 +21,7 @@ begin
 	where r.RecipeId = @RecipeId
 	or @All = 1
 	or r.RecipeName like '%' + @RecipeName + '%'
-	union select 0,0,0,'','','',0,0,0,0,0,0,'','','',''
+	union select 0,0,0,'','','',0,0,0,0,0,0,null,'','',''
 	where @IncludeBlank = 1
 	order by ListOrder, r.RecipeStatus desc
 end

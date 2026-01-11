@@ -1,4 +1,6 @@
 ﻿using CPUFramework;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace RecipeSystem
 {
@@ -140,6 +142,11 @@ namespace RecipeSystem
             }
         }
 
-
+        public List<bizRecipe> Search(string recipenamevaluetosearch)
+        {
+            SqlCommand cmd = SQLUtility.GetSqlCommand(GetSprocName);
+            SQLUtility.SetParamaterValue(cmd, "RecipeName", recipenamevaluetosearch);
+            return GetListFromDataTable(SQLUtility.GetDataTable(cmd)); 
+        }
     }
 }
